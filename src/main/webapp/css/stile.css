@@ -177,3 +177,122 @@ body {
         width: 100%;
     }
 }
+
+.dettaglio-prodotto {
+    display: flex;
+    gap: 30px;
+    background-color: white;
+    border: 1px solid #ddd;
+    padding: 25px;
+    margin-top: 25px;
+}
+
+.immagine-dettaglio {
+    width: 40%;
+    min-height: 300px;
+    background-color: #e5e7eb;
+    border: 1px solid #d1d5db;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #6b7280;
+}
+
+.info-dettaglio {
+    flex: 1;
+}
+
+.info-dettaglio form {
+    margin-top: 25px;
+}
+
+.info-dettaglio input[type="number"] {
+    width: 70px;
+    padding: 8px;
+    margin: 0 10px;
+}
+
+.info-dettaglio button {
+    border: none;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 700px) {
+    .dettaglio-prodotto {
+        flex-direction: column;
+    }
+
+    .immagine-dettaglio {
+        width: 100%;
+    }
+}
+
+.tabella-carrello {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    margin-top: 25px;
+}
+
+.tabella-carrello th,
+.tabella-carrello td {
+    border: 1px solid #ddd;
+    padding: 12px;
+    text-align: left;
+}
+
+.tabella-carrello th {
+    background-color: #1f2937;
+    color: white;
+}
+
+.tabella-carrello input[type="number"] {
+    width: 70px;
+    padding: 6px;
+}
+
+.tabella-carrello button {
+    padding: 7px 10px;
+    border: none;
+    background-color: #2563eb;
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.tabella-carrello button:hover {
+    background-color: #1d4ed8;
+}
+
+.riepilogo-carrello {
+    margin-top: 25px;
+    background-color: white;
+    border: 1px solid #ddd;
+    padding: 20px;
+}
+
+.riepilogo-carrello form {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.bottone-secondario {
+    background-color: #6b7280;
+    border: none;
+    cursor: pointer;
+}
+
+.bottone-secondario:hover {
+    background-color: #4b5563;
+}
+
+@media screen and (max-width: 700px) {
+    .tabella-carrello {
+        font-size: 14px;
+    }
+
+    .tabella-carrello th,
+    .tabella-carrello td {
+        padding: 8px;
+    }
+}
