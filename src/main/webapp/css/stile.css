@@ -296,3 +296,46 @@ body {
         padding: 8px;
     }
 }
+
+.box-form {
+    max-width: 450px;
+    margin: 0 auto;
+    background-color: white;
+    border: 1px solid #ddd;
+    padding: 25px;
+}
+
+.box-form form {
+    display: flex;
+    flex-direction: column;
+}
+
+.box-form label {
+    font-weight: bold;
+    margin-top: 12px;
+    margin-bottom: 5px;
+}
+
+.box-form input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.box-form button {
+    margin-top: 20px;
+    border: none;
+    cursor: pointer;
+}
+
+.messaggio-errore {
+    background-color: #fee2e2;
+    color: #991b1b;
+    padding: 10px;
+    border: 1px solid #fecaca;
+}
+
+.testo-aiuto {
+    font-size: 14px;
+    color: #555;
+}

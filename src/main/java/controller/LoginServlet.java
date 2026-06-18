@@ -1,0 +1,68 @@
+package controller;
+
+import java.io.IOException;
+
+import jakarta.servlet.RequestDispatcher;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+import modello.Utente;
+
+@WebServlet("/login")
+public class LoginServlet extends HttpServlet {
+    private static final long serialVersionUID = 1L;
+
+    public LoginServlet() {
+        super();
+    }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/pagine/login.jsp");
+        dispatcher.forward(request, response);
+    }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+
+        if (email == null || email.trim().equals("") || password == null || password.trim().equals("")) {
+            request.setAttribute("errore", "Inserisci email e password.");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/pagine/login.jsp");
+            dispatcher.forward(request, response);
+            return;
+        }
+
+        email = email.trim();
+
+        Utente utente = null;
+
+        if (email.equals("admin@skintrade.it") && password.equals("admin")) {
+            utente = new Utente(1, "Admin", "SkinTrade", email, password, "ADMIN");
+        } else if (email.equals("utente@skintrade.it") && password.equals("utente")) {
+            utente = new Utente(2, "Mario", "Rossi", email, password, "USER");
+        }
+
+        if (utente == null) {
+            request.setAttribute("errore", "Credenziali non valide.");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/pagine/login.jsp");
+            dispatcher.forward(request, response);
+            return;
+        }
+
+        HttpSession sessione = request.getSession();
+        sessione.setAttribute("utenteLoggato", utente);
+
+        if (utente.isAdmin()) {
+            response.sendRedirect(request.getContextPath() + "/admin/home");
+        } else {
+            response.sendRedirect(request.getContextPath() + "/index.jsp");
+        }
+    }
+}
