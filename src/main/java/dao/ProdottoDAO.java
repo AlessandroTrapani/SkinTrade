@@ -113,4 +113,35 @@ public class ProdottoDAO {
 
         return prodotti;
     }
+    
+    public boolean salva(Prodotto prodotto) {
+        String sql = "INSERT INTO prodotti "
+                + "(nome, gioco, categoria, rarita, condizione, prezzo, quantita, immagine, descrizione, stato) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        try (
+            Connection connessione = ConnessioneDatabase.getConnessione();
+            PreparedStatement statement = connessione.prepareStatement(sql)
+        ) {
+            statement.setString(1, prodotto.getNome());
+            statement.setString(2, prodotto.getGioco());
+            statement.setString(3, prodotto.getCategoria());
+            statement.setString(4, prodotto.getRarita());
+            statement.setString(5, prodotto.getCondizione());
+            statement.setDouble(6, prodotto.getPrezzo());
+            statement.setInt(7, prodotto.getQuantita());
+            statement.setString(8, prodotto.getImmagine());
+            statement.setString(9, prodotto.getDescrizione());
+            statement.setString(10, "DISPONIBILE");
+
+            int righeInserite = statement.executeUpdate();
+
+            return righeInserite > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
 }
