@@ -9,6 +9,8 @@ import modello.Carrello;
 import modello.ElementoCarrello;
 import modello.Ordine;
 import util.ConnessioneDatabase;
+import java.util.ArrayList;
+import modello.DettaglioOrdine;
 
 public class OrdineDAO {
 
@@ -135,5 +137,72 @@ public class OrdineDAO {
         }
 
         return ordini;
+    }
+    
+    public Ordine trovaOrdinePerIdEUtente(int idOrdine, int idUtente) {
+        Ordine ordine = null;
+
+        String sql = "SELECT * FROM ordini WHERE id = ? AND id_utente = ?";
+
+        try (
+            Connection connessione = ConnessioneDatabase.getConnessione();
+            PreparedStatement statement = connessione.prepareStatement(sql)
+        ) {
+            statement.setInt(1, idOrdine);
+            statement.setInt(2, idUtente);
+
+            try (ResultSet risultato = statement.executeQuery()) {
+                if (risultato.next()) {
+                    ordine = new Ordine();
+
+                    ordine.setId(risultato.getInt("id"));
+                    ordine.setIdUtente(risultato.getInt("id_utente"));
+                    ordine.setTotale(risultato.getDouble("totale"));
+                    ordine.setEmailConsegna(risultato.getString("email_consegna"));
+                    ordine.setNoteConsegna(risultato.getString("note_consegna"));
+                    ordine.setMetodoPagamento(risultato.getString("metodo_pagamento"));
+                    ordine.setStato(risultato.getString("stato"));
+                    ordine.setDataOrdine(risultato.getString("data_ordine"));
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return ordine;
+    }
+    
+    public ArrayList<DettaglioOrdine> trovaDettagliPerOrdine(int idOrdine) {
+        ArrayList<DettaglioOrdine> dettagli = new ArrayList<>();
+
+        String sql = "SELECT * FROM dettagli_ordine WHERE id_ordine = ?";
+
+        try (
+            Connection connessione = ConnessioneDatabase.getConnessione();
+            PreparedStatement statement = connessione.prepareStatement(sql)
+        ) {
+            statement.setInt(1, idOrdine);
+
+            try (ResultSet risultato = statement.executeQuery()) {
+                while (risultato.next()) {
+                    DettaglioOrdine dettaglio = new DettaglioOrdine();
+
+                    dettaglio.setId(risultato.getInt("id"));
+                    dettaglio.setIdOrdine(risultato.getInt("id_ordine"));
+                    dettaglio.setIdProdotto(risultato.getInt("id_prodotto"));
+                    dettaglio.setNomeProdotto(risultato.getString("nome_prodotto"));
+                    dettaglio.setPrezzo(risultato.getDouble("prezzo"));
+                    dettaglio.setQuantita(risultato.getInt("quantita"));
+
+                    dettagli.add(dettaglio);
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return dettagli;
     }
 }
