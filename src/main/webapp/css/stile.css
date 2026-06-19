@@ -349,3 +349,22 @@ body {
 .link-azione:hover {
     text-decoration: underline;
 }
+
+.intestazione-sezione {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.link-pericolo {
+    color: #dc2626;
+}
+
+@media screen and (max-width: 700px) {
+    .intestazione-sezione {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}

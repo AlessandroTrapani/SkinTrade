@@ -79,4 +79,38 @@ public class ProdottoDAO {
 
         return prodotto;
     }
+    
+    public ArrayList<Prodotto> trovaTuttiAdmin() {
+        ArrayList<Prodotto> prodotti = new ArrayList<>();
+
+        String sql = "SELECT * FROM prodotti ORDER BY id DESC";
+
+        try (
+            Connection connessione = ConnessioneDatabase.getConnessione();
+            PreparedStatement statement = connessione.prepareStatement(sql);
+            ResultSet risultato = statement.executeQuery()
+        ) {
+            while (risultato.next()) {
+                Prodotto prodotto = new Prodotto();
+
+                prodotto.setId(risultato.getInt("id"));
+                prodotto.setNome(risultato.getString("nome"));
+                prodotto.setGioco(risultato.getString("gioco"));
+                prodotto.setCategoria(risultato.getString("categoria"));
+                prodotto.setRarita(risultato.getString("rarita"));
+                prodotto.setCondizione(risultato.getString("condizione"));
+                prodotto.setPrezzo(risultato.getDouble("prezzo"));
+                prodotto.setQuantita(risultato.getInt("quantita"));
+                prodotto.setImmagine(risultato.getString("immagine"));
+                prodotto.setDescrizione(risultato.getString("descrizione"));
+
+                prodotti.add(prodotto);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return prodotti;
+    }
 }
