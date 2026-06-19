@@ -339,3 +339,13 @@ body {
     font-size: 14px;
     color: #555;
 }
+
+.link-azione {
+    color: #2563eb;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.link-azione:hover {
+    text-decoration: underline;
+}

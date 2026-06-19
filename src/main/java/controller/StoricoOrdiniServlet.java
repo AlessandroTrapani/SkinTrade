@@ -1,7 +1,9 @@
 package controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
+import dao.OrdineDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -9,6 +11,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import modello.Ordine;
 import modello.Utente;
 
 @WebServlet("/storico-ordini")
@@ -30,6 +33,11 @@ public class StoricoOrdiniServlet extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/login");
             return;
         }
+
+        OrdineDAO ordineDAO = new OrdineDAO();
+        ArrayList<Ordine> ordini = ordineDAO.trovaOrdiniPerUtente(utente.getId());
+
+        request.setAttribute("ordini", ordini);
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("/pagine/storico-ordini.jsp");
         dispatcher.forward(request, response);

@@ -4,7 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
+import java.util.ArrayList;
 import modello.Carrello;
 import modello.ElementoCarrello;
 import modello.Ordine;
@@ -100,5 +100,40 @@ public class OrdineDAO {
         }
 
         return false;
+    }
+    
+    public ArrayList<Ordine> trovaOrdiniPerUtente(int idUtente) {
+        ArrayList<Ordine> ordini = new ArrayList<>();
+
+        String sql = "SELECT * FROM ordini WHERE id_utente = ? ORDER BY data_ordine DESC";
+
+        try (
+            Connection connessione = ConnessioneDatabase.getConnessione();
+            PreparedStatement statement = connessione.prepareStatement(sql)
+        ) {
+            statement.setInt(1, idUtente);
+
+            try (ResultSet risultato = statement.executeQuery()) {
+                while (risultato.next()) {
+                    Ordine ordine = new Ordine();
+
+                    ordine.setId(risultato.getInt("id"));
+                    ordine.setIdUtente(risultato.getInt("id_utente"));
+                    ordine.setTotale(risultato.getDouble("totale"));
+                    ordine.setEmailConsegna(risultato.getString("email_consegna"));
+                    ordine.setNoteConsegna(risultato.getString("note_consegna"));
+                    ordine.setMetodoPagamento(risultato.getString("metodo_pagamento"));
+                    ordine.setStato(risultato.getString("stato"));
+                    ordine.setDataOrdine(risultato.getString("data_ordine"));
+
+                    ordini.add(ordine);
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return ordini;
     }
 }

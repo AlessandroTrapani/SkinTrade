@@ -19,11 +19,17 @@
         <h1 class="logo">SkinTrade</h1>
 
         <nav class="menu-principale">
-            <a href="${pageContext.request.contextPath}/index.jsp">Home</a>
-            <a href="${pageContext.request.contextPath}/catalogo">Catalogo</a>
-            <a href="${pageContext.request.contextPath}/carrello">Carrello</a>
-            <a href="${pageContext.request.contextPath}/login">Login</a>
-        </nav>
+    <a href="${pageContext.request.contextPath}/index.jsp">Home</a>
+    <a href="${pageContext.request.contextPath}/catalogo">Catalogo</a>
+    <a href="${pageContext.request.contextPath}/carrello">Carrello</a>
+
+    <% if (session.getAttribute("utenteLoggato") == null) { %>
+        <a href="${pageContext.request.contextPath}/login">Login</a>
+    <% } else { %>
+        <a href="${pageContext.request.contextPath}/storico-ordini">I miei ordini</a>
+        <a href="${pageContext.request.contextPath}/logout">Logout</a>
+    <% } %>
+</nav>
     </div>
 </header>
 
