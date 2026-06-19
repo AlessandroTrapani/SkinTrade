@@ -144,4 +144,43 @@ public class ProdottoDAO {
 
         return false;
     }
+    
+    public boolean modifica(Prodotto prodotto) {
+        String sql = "UPDATE prodotti SET "
+                + "nome = ?, "
+                + "gioco = ?, "
+                + "categoria = ?, "
+                + "rarita = ?, "
+                + "condizione = ?, "
+                + "prezzo = ?, "
+                + "quantita = ?, "
+                + "immagine = ?, "
+                + "descrizione = ? "
+                + "WHERE id = ?";
+
+        try (
+            Connection connessione = ConnessioneDatabase.getConnessione();
+            PreparedStatement statement = connessione.prepareStatement(sql)
+        ) {
+            statement.setString(1, prodotto.getNome());
+            statement.setString(2, prodotto.getGioco());
+            statement.setString(3, prodotto.getCategoria());
+            statement.setString(4, prodotto.getRarita());
+            statement.setString(5, prodotto.getCondizione());
+            statement.setDouble(6, prodotto.getPrezzo());
+            statement.setInt(7, prodotto.getQuantita());
+            statement.setString(8, prodotto.getImmagine());
+            statement.setString(9, prodotto.getDescrizione());
+            statement.setInt(10, prodotto.getId());
+
+            int righeModificate = statement.executeUpdate();
+
+            return righeModificate > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
 }
