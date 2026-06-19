@@ -14,7 +14,7 @@ public class ProdottoDAO {
     public ArrayList<Prodotto> trovaTutti() {
         ArrayList<Prodotto> prodotti = new ArrayList<>();
 
-        String sql = "SELECT * FROM prodotti WHERE stato = 'DISPONIBILE'";
+        String sql = "SELECT * FROM prodotti WHERE stato = 'DISPONIBILE' AND quantita > 0";
 
         try (
             Connection connessione = ConnessioneDatabase.getConnessione();
@@ -172,6 +172,25 @@ public class ProdottoDAO {
             statement.setString(8, prodotto.getImmagine());
             statement.setString(9, prodotto.getDescrizione());
             statement.setInt(10, prodotto.getId());
+
+            int righeModificate = statement.executeUpdate();
+
+            return righeModificate > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
+    public boolean elimina(int idProdotto) {
+        String sql = "UPDATE prodotti SET stato = 'ELIMINATO' WHERE id = ?";
+
+        try (
+            Connection connessione = ConnessioneDatabase.getConnessione();
+            PreparedStatement statement = connessione.prepareStatement(sql)
+        ) {
+            statement.setInt(1, idProdotto);
 
             int righeModificate = statement.executeUpdate();
 
