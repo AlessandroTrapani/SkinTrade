@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 
+import dao.UtenteDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -39,15 +40,8 @@ public class LoginServlet extends HttpServlet {
             return;
         }
 
-        email = email.trim();
-
-        Utente utente = null;
-
-        if (email.equals("admin@skintrade.it") && password.equals("admin")) {
-            utente = new Utente(1, "Admin", "SkinTrade", email, password, "ADMIN");
-        } else if (email.equals("utente@skintrade.it") && password.equals("utente")) {
-            utente = new Utente(2, "Mario", "Rossi", email, password, "USER");
-        }
+        UtenteDAO utenteDAO = new UtenteDAO();
+        Utente utente = utenteDAO.trovaPerEmailEPassword(email.trim(), password);
 
         if (utente == null) {
             request.setAttribute("errore", "Credenziali non valide.");

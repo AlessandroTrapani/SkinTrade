@@ -2,6 +2,7 @@ package controller;
 
 import java.io.IOException;
 
+import dao.UtenteDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -45,10 +46,35 @@ public class RegistrazioneServlet extends HttpServlet {
             return;
         }
 
-        Utente utente = new Utente(3, nome.trim(), cognome.trim(), email.trim(), password, "USER");
+        UtenteDAO utenteDAO = new UtenteDAO();
+
+        if (utenteDAO.emailEsistente(email.trim())) {
+            request.setAttribute("errore", "Email già registrata.");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/pagine/registrazione.jsp");
+            dispatcher.forward(request, response);
+            return;
+        }
+
+        Utente nuovoUtente = new Utente();
+        nuovoUtente.setNome(nome.trim());
+        nuovoUtente.setCognome(cognome.trim());
+        nuovoUtente.setEmail(email.trim());
+        nuovoUtente.setPassword(password);
+        nuovoUtente.setRuolo("UTENTE");
+
+        boolean salvato = utenteDAO.salva(nuovoUtente);
+
+        if (!salvato) {
+            request.setAttribute("errore", "Errore durante la registrazione.");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/pagine/registrazione.jsp");
+            dispatcher.forward(request, response);
+            return;
+        }
+
+        Utente utenteLoggato = utenteDAO.trovaPerEmailEPassword(email.trim(), password);
 
         HttpSession sessione = request.getSession();
-        sessione.setAttribute("utenteLoggato", utente);
+        sessione.setAttribute("utenteLoggato", utenteLoggato);
 
         response.sendRedirect(request.getContextPath() + "/index.jsp");
     }
