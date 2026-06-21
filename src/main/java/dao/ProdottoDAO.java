@@ -34,7 +34,7 @@ public class ProdottoDAO {
                 prodotto.setQuantita(risultato.getInt("quantita"));
                 prodotto.setImmagine(risultato.getString("immagine"));
                 prodotto.setDescrizione(risultato.getString("descrizione"));
-
+                prodotto.setStato(risultato.getString("stato"));
                 prodotti.add(prodotto);
             }
 
@@ -70,6 +70,7 @@ public class ProdottoDAO {
                     prodotto.setQuantita(risultato.getInt("quantita"));
                     prodotto.setImmagine(risultato.getString("immagine"));
                     prodotto.setDescrizione(risultato.getString("descrizione"));
+                    prodotto.setStato(risultato.getString("stato"));
                 }
             }
 
@@ -103,7 +104,7 @@ public class ProdottoDAO {
                 prodotto.setQuantita(risultato.getInt("quantita"));
                 prodotto.setImmagine(risultato.getString("immagine"));
                 prodotto.setDescrizione(risultato.getString("descrizione"));
-
+                prodotto.setStato(risultato.getString("stato"));
                 prodotti.add(prodotto);
             }
 
@@ -132,7 +133,11 @@ public class ProdottoDAO {
             statement.setInt(7, prodotto.getQuantita());
             statement.setString(8, prodotto.getImmagine());
             statement.setString(9, prodotto.getDescrizione());
-            statement.setString(10, "DISPONIBILE");
+            if (prodotto.getQuantita() > 0) {
+                statement.setString(10, "DISPONIBILE");
+            } else {
+                statement.setString(10, "NON_DISPONIBILE");
+            }
 
             int righeInserite = statement.executeUpdate();
 
@@ -146,17 +151,18 @@ public class ProdottoDAO {
     }
     
     public boolean modifica(Prodotto prodotto) {
-        String sql = "UPDATE prodotti SET "
-                + "nome = ?, "
-                + "gioco = ?, "
-                + "categoria = ?, "
-                + "rarita = ?, "
-                + "condizione = ?, "
-                + "prezzo = ?, "
-                + "quantita = ?, "
-                + "immagine = ?, "
-                + "descrizione = ? "
-                + "WHERE id = ?";
+    	String sql = "UPDATE prodotti SET "
+    	        + "nome = ?, "
+    	        + "gioco = ?, "
+    	        + "categoria = ?, "
+    	        + "rarita = ?, "
+    	        + "condizione = ?, "
+    	        + "prezzo = ?, "
+    	        + "quantita = ?, "
+    	        + "immagine = ?, "
+    	        + "descrizione = ?, "
+    	        + "stato = ? "
+    	        + "WHERE id = ?";
 
         try (
             Connection connessione = ConnessioneDatabase.getConnessione();
@@ -171,7 +177,13 @@ public class ProdottoDAO {
             statement.setInt(7, prodotto.getQuantita());
             statement.setString(8, prodotto.getImmagine());
             statement.setString(9, prodotto.getDescrizione());
-            statement.setInt(10, prodotto.getId());
+            if (prodotto.getQuantita() > 0) {
+                statement.setString(10, "DISPONIBILE");
+            } else {
+                statement.setString(10, "NON_DISPONIBILE");
+            }
+
+            statement.setInt(11, prodotto.getId());
 
             int righeModificate = statement.executeUpdate();
 
@@ -183,7 +195,46 @@ public class ProdottoDAO {
 
         return false;
     }
-    public boolean elimina(int idProdotto) {
+    public boolean modifica(Prodotto prodotto) {
+	    String sql = "UPDATE prodotti SET "
+	            + "nome = ?, "
+	            + "gioco = ?, "
+	            + "categoria = ?, "
+	            + "rarita = ?, "
+	            + "condizione = ?, "
+	            + "prezzo = ?, "
+	            + "quantita = ?, "
+	            + "immagine = ?, "
+	            + "descrizione = ? "
+	            + "WHERE id = ?";
+	
+	    try (
+	        Connection connessione = ConnessioneDatabase.getConnessione();
+	        PreparedStatement statement = connessione.prepareStatement(sql)
+	    ) {
+	        statement.setString(1, prodotto.getNome());
+	        statement.setString(2, prodotto.getGioco());
+	        statement.setString(3, prodotto.getCategoria());
+	        statement.setString(4, prodotto.getRarita());
+	        statement.setString(5, prodotto.getCondizione());
+	        statement.setDouble(6, prodotto.getPrezzo());
+	        statement.setInt(7, prodotto.getQuantita());
+	        statement.setString(8, prodotto.getImmagine());
+	        statement.setString(9, prodotto.getDescrizione());
+	        statement.setInt(10, prodotto.getId());
+	
+	        int righeModificate = statement.executeUpdate();
+	
+	        return righeModificate > 0;
+	
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	
+	    return false;
+	}
+
+	public boolean elimina(int idProdotto) {
         String sql = "UPDATE prodotti SET stato = 'ELIMINATO' WHERE id = ?";
 
         try (
@@ -287,7 +338,7 @@ public class ProdottoDAO {
                     prodotto.setQuantita(risultato.getInt("quantita"));
                     prodotto.setImmagine(risultato.getString("immagine"));
                     prodotto.setDescrizione(risultato.getString("descrizione"));
-
+                    prodotto.setStato(risultato.getString("stato"));
                     prodotti.add(prodotto);
                 }
             }

@@ -11,7 +11,8 @@ public class Prodotto {
     private int quantita;
     private String immagine;
     private String descrizione;
-
+    private String stato;
+    
     public Prodotto() {
     }
 
@@ -117,5 +118,13 @@ public class Prodotto {
 
     public void setDescrizione(String descrizione) {
         this.descrizione = descrizione;
+    }
+    
+    public String getStato() {
+        return stato;
+    }
+
+    public void setStato(String stato) {
+        this.stato = stato;
     }
 }

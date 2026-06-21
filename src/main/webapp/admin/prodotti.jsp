@@ -55,7 +55,9 @@
                     <th>Condizione</th>
                     <th>Prezzo</th>
                     <th>Quantità</th>
+                    <th>Stato</th>
                     <th>Azioni</th>
+                    
                 </tr>
             </thead>
 
@@ -70,6 +72,7 @@
                         <td><%= prodotto.getCondizione() %></td>
                         <td>€ <%= prodotto.getPrezzo() %></td>
                         <td><%= prodotto.getQuantita() %></td>
+                        <td><%= prodotto.getStato() %></td>
                         <td>
                             <a class="link-azione" href="${pageContext.request.contextPath}/admin/modifica-prodotto?id=<%= prodotto.getId() %>">
                                 Modifica
