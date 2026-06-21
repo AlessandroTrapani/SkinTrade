@@ -4,6 +4,10 @@
 
 <%
     ArrayList<Ordine> ordini = (ArrayList<Ordine>) request.getAttribute("ordini");
+	String dataInizio = (String) request.getAttribute("dataInizio");
+	String dataFine = (String) request.getAttribute("dataFine");
+	String idUtente = (String) request.getAttribute("idUtente");
+	String emailConsegna = (String) request.getAttribute("emailConsegna");
 %>
 
 <!DOCTYPE html>
@@ -31,7 +35,56 @@
 
 <main class="contenitore contenuto-pagina">
     <h2>Gestione ordini</h2>
+	
+	<form class="form-filtri" action="${pageContext.request.contextPath}/admin/ordini" method="get">
+    <div>
+        <label for="dataInizio">Da data</label>
+        <input 
+            type="date" 
+            id="dataInizio" 
+            name="dataInizio"
+            value="<%= dataInizio != null ? dataInizio : "" %>"
+        >
+    </div>
 
+    <div>
+        <label for="dataFine">A data</label>
+        <input 
+            type="date" 
+            id="dataFine" 
+            name="dataFine"
+            value="<%= dataFine != null ? dataFine : "" %>"
+        >
+    </div>
+
+    <div>
+        <label for="idUtente">ID utente</label>
+        <input 
+            type="number" 
+            id="idUtente" 
+            name="idUtente"
+            min="1"
+            value="<%= idUtente != null ? idUtente : "" %>"
+            placeholder="Es. 1"
+        >
+    </div>
+
+    <div>
+        <label for="emailConsegna">Email cliente</label>
+        <input 
+            type="text" 
+            id="emailConsegna" 
+            name="emailConsegna"
+            value="<%= emailConsegna != null ? emailConsegna : "" %>"
+            placeholder="utente@skintrade.it"
+        >
+    </div>
+
+    <div class="azioni-filtri">
+        <button class="bottone" type="submit">Filtra</button>
+        <a class="bottone-secondario" href="${pageContext.request.contextPath}/admin/ordini">Reset</a>
+    </div>
+</form>
     <% if (ordini == null || ordini.isEmpty()) { %>
 
         <p>Non ci sono ordini registrati.</p>

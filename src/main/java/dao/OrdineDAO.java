@@ -289,4 +289,77 @@ public class OrdineDAO {
 
         return false;
     }
+    
+    public ArrayList<Ordine> cercaOrdiniAdmin(String dataInizio, String dataFine, String idUtenteParametro, String emailConsegna) {
+        ArrayList<Ordine> ordini = new ArrayList<>();
+
+        String sql = "SELECT * FROM ordini "
+                + "WHERE (? IS NULL OR DATE(data_ordine) >= ?) "
+                + "AND (? IS NULL OR DATE(data_ordine) <= ?) "
+                + "AND (? IS NULL OR id_utente = ?) "
+                + "AND (? IS NULL OR email_consegna LIKE ?) "
+                + "ORDER BY data_ordine DESC";
+
+        try (
+            Connection connessione = ConnessioneDatabase.getConnessione();
+            PreparedStatement statement = connessione.prepareStatement(sql)
+        ) {
+            if (dataInizio == null || dataInizio.trim().equals("")) {
+                statement.setString(1, null);
+                statement.setString(2, null);
+            } else {
+                statement.setString(1, dataInizio.trim());
+                statement.setString(2, dataInizio.trim());
+            }
+
+            if (dataFine == null || dataFine.trim().equals("")) {
+                statement.setString(3, null);
+                statement.setString(4, null);
+            } else {
+                statement.setString(3, dataFine.trim());
+                statement.setString(4, dataFine.trim());
+            }
+
+            if (idUtenteParametro == null || idUtenteParametro.trim().equals("")) {
+                statement.setString(5, null);
+                statement.setString(6, null);
+            } else {
+                statement.setString(5, idUtenteParametro.trim());
+                statement.setInt(6, Integer.parseInt(idUtenteParametro.trim()));
+            }
+
+            if (emailConsegna == null || emailConsegna.trim().equals("")) {
+                statement.setString(7, null);
+                statement.setString(8, null);
+            } else {
+                statement.setString(7, emailConsegna.trim());
+                statement.setString(8, "%" + emailConsegna.trim() + "%");
+            }
+
+            try (ResultSet risultato = statement.executeQuery()) {
+                while (risultato.next()) {
+                    Ordine ordine = new Ordine();
+
+                    ordine.setId(risultato.getInt("id"));
+                    ordine.setIdUtente(risultato.getInt("id_utente"));
+                    ordine.setTotale(risultato.getDouble("totale"));
+                    ordine.setEmailConsegna(risultato.getString("email_consegna"));
+                    ordine.setNoteConsegna(risultato.getString("note_consegna"));
+                    ordine.setMetodoPagamento(risultato.getString("metodo_pagamento"));
+                    ordine.setStato(risultato.getString("stato"));
+                    ordine.setDataOrdine(risultato.getString("data_ordine"));
+
+                    ordini.add(ordine);
+                }
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+
+        return ordini;
+    }
+    
 }
