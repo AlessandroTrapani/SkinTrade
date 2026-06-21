@@ -268,4 +268,25 @@ public class OrdineDAO {
 
         return ordini;
     }
+    
+    public boolean aggiornaStatoOrdine(int idOrdine, String stato) {
+        String sql = "UPDATE ordini SET stato = ? WHERE id = ?";
+
+        try (
+            Connection connessione = ConnessioneDatabase.getConnessione();
+            PreparedStatement statement = connessione.prepareStatement(sql)
+        ) {
+            statement.setString(1, stato);
+            statement.setInt(2, idOrdine);
+
+            int righeModificate = statement.executeUpdate();
+
+            return righeModificate > 0;
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return false;
+    }
 }

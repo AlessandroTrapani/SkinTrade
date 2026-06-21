@@ -46,6 +46,27 @@
             <p><strong>Email consegna:</strong> <%= ordine.getEmailConsegna() %></p>
             <p><strong>Metodo pagamento:</strong> <%= ordine.getMetodoPagamento() %></p>
             <p><strong>Stato:</strong> <%= ordine.getStato() %></p>
+            <form action="${pageContext.request.contextPath}/admin/aggiorna-stato-ordine" method="post" class="form-stato-ordine">
+    <input type="hidden" name="idOrdine" value="<%= ordine.getId() %>">
+
+    <label for="stato">Aggiorna stato ordine</label>
+
+    <select id="stato" name="stato">
+        <option value="IN_ELABORAZIONE" <%= "IN_ELABORAZIONE".equals(ordine.getStato()) ? "selected" : "" %>>
+            In elaborazione
+        </option>
+
+        <option value="COMPLETATO" <%= "COMPLETATO".equals(ordine.getStato()) ? "selected" : "" %>>
+            Completato
+        </option>
+
+        <option value="ANNULLATO" <%= "ANNULLATO".equals(ordine.getStato()) ? "selected" : "" %>>
+            Annullato
+        </option>
+    </select>
+
+    <button class="bottone" type="submit">Aggiorna stato</button>
+</form>
 
             <% if (ordine.getNoteConsegna() != null && !ordine.getNoteConsegna().trim().equals("")) { %>
                 <p><strong>Note consegna:</strong> <%= ordine.getNoteConsegna() %></p>
