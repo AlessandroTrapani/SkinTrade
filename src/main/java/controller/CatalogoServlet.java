@@ -23,10 +23,17 @@ public class CatalogoServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        String ricerca = request.getParameter("ricerca");
+        String gioco = request.getParameter("gioco");
+        String categoria = request.getParameter("categoria");
+
         ProdottoDAO prodottoDAO = new ProdottoDAO();
-        ArrayList<Prodotto> prodotti = prodottoDAO.trovaTutti();
+        ArrayList<Prodotto> prodotti = prodottoDAO.cercaProdotti(ricerca, gioco, categoria);
 
         request.setAttribute("prodotti", prodotti);
+        request.setAttribute("ricerca", ricerca);
+        request.setAttribute("gioco", gioco);
+        request.setAttribute("categoria", categoria);
 
         RequestDispatcher dispatcher = request.getRequestDispatcher("/pagine/catalogo.jsp");
         dispatcher.forward(request, response);

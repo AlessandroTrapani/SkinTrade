@@ -395,3 +395,47 @@ body {
     border-radius: 6px;
     margin-right: 8px;
 }
+
+.form-filtri {
+    background-color: #ffffff;
+    padding: 18px;
+    border-radius: 10px;
+    margin-bottom: 24px;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr auto;
+    gap: 14px;
+    align-items: end;
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.08);
+}
+
+.form-filtri label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 6px;
+}
+
+.form-filtri input,
+.form-filtri select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+}
+
+.azioni-filtri {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+@media screen and (max-width: 900px) {
+    .form-filtri {
+        grid-template-columns: 1fr;
+    }
+
+    .azioni-filtri {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
+
