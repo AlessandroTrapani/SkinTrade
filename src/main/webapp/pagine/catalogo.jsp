@@ -106,8 +106,15 @@
 
                 <div class="scheda-prodotto">
                     <div class="immagine-prodotto">
-                        <span>Immagine</span>
-                    </div>
+    <% if (prodotto.getImmagine() != null && !prodotto.getImmagine().trim().equals("")) { %>
+        <img 
+            src="${pageContext.request.contextPath}/immagini/prodotti/<%= prodotto.getImmagine() %>" 
+            alt="<%= prodotto.getNome() %>"
+        >
+    <% } else { %>
+        <span>Immagine non disponibile</span>
+    <% } %>
+</div>
 
                     <h3><%= prodotto.getNome() %></h3>
 

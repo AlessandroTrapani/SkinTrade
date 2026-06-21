@@ -151,13 +151,39 @@ body {
 }
 
 .immagine-prodotto {
-    height: 150px;
+    width: 100%;
+    height: 180px;
     background-color: #e5e7eb;
-    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    margin-bottom: 14px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #6b7280;
+    overflow: hidden;
+}
+
+.immagine-prodotto img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.immagine-dettaglio {
+    width: 100%;
+    max-width: 420px;
+    height: 320px;
+    background-color: #e5e7eb;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.immagine-dettaglio img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .prezzo {

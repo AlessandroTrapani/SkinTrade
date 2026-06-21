@@ -48,9 +48,16 @@
         <a href="${pageContext.request.contextPath}/catalogo">Torna al catalogo</a>
 
         <div class="dettaglio-prodotto">
-            <div class="immagine-dettaglio">
-                <span>Immagine prodotto</span>
-            </div>
+           <div class="immagine-dettaglio">
+    <% if (prodotto.getImmagine() != null && !prodotto.getImmagine().trim().equals("")) { %>
+        <img 
+            src="${pageContext.request.contextPath}/immagini/prodotti/<%= prodotto.getImmagine() %>" 
+            alt="<%= prodotto.getNome() %>"
+        >
+    <% } else { %>
+        <span>Immagine non disponibile</span>
+    <% } %>
+</div>
 
             <div class="info-dettaglio">
                 <h2><%= prodotto.getNome() %></h2>

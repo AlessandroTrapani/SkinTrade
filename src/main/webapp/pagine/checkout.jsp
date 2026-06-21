@@ -71,6 +71,41 @@
                 <option value="PayPal">PayPal</option>
                 <option value="Saldo SkinTrade">Saldo SkinTrade</option>
             </select>
+            <h3>Simulazione pagamento</h3>
+
+<label for="nomeCarta">Nome intestatario *</label>
+<input 
+    type="text" 
+    id="nomeCarta" 
+    name="nomeCarta" 
+    placeholder="Mario Rossi"
+>
+
+<label for="numeroCarta">Numero carta *</label>
+<input 
+    type="text" 
+    id="numeroCarta" 
+    name="numeroCarta" 
+    maxlength="16"
+    placeholder="1234567812345678"
+>
+
+<label for="scadenzaCarta">Scadenza *</label>
+<input 
+    type="month" 
+    id="scadenzaCarta" 
+    name="scadenzaCarta"
+>
+
+<label for="cvv">CVV *</label>
+<input 
+    type="password" 
+    id="cvv" 
+    name="cvv" 
+    maxlength="3"
+    placeholder="123"
+>
+
 
             <h3>Riepilogo carrello</h3>
 
