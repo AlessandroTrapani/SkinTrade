@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import modello.Ordine;
 import modello.Prodotto;
 import util.ConnessioneDatabase;
 
@@ -195,44 +194,7 @@ public class ProdottoDAO {
 
         return false;
     }
-    public boolean modifica(Prodotto prodotto) {
-	    String sql = "UPDATE prodotti SET "
-	            + "nome = ?, "
-	            + "gioco = ?, "
-	            + "categoria = ?, "
-	            + "rarita = ?, "
-	            + "condizione = ?, "
-	            + "prezzo = ?, "
-	            + "quantita = ?, "
-	            + "immagine = ?, "
-	            + "descrizione = ? "
-	            + "WHERE id = ?";
-	
-	    try (
-	        Connection connessione = ConnessioneDatabase.getConnessione();
-	        PreparedStatement statement = connessione.prepareStatement(sql)
-	    ) {
-	        statement.setString(1, prodotto.getNome());
-	        statement.setString(2, prodotto.getGioco());
-	        statement.setString(3, prodotto.getCategoria());
-	        statement.setString(4, prodotto.getRarita());
-	        statement.setString(5, prodotto.getCondizione());
-	        statement.setDouble(6, prodotto.getPrezzo());
-	        statement.setInt(7, prodotto.getQuantita());
-	        statement.setString(8, prodotto.getImmagine());
-	        statement.setString(9, prodotto.getDescrizione());
-	        statement.setInt(10, prodotto.getId());
-	
-	        int righeModificate = statement.executeUpdate();
-	
-	        return righeModificate > 0;
-	
-	    } catch (SQLException e) {
-	        e.printStackTrace();
-	    }
-	
-	    return false;
-	}
+
 
 	public boolean elimina(int idProdotto) {
         String sql = "UPDATE prodotti SET stato = 'ELIMINATO' WHERE id = ?";
@@ -254,37 +216,6 @@ public class ProdottoDAO {
         return false;
     }
     
-    public ArrayList<Ordine> trovaTuttiOrdini() {
-        ArrayList<Ordine> ordini = new ArrayList<>();
-
-        String sql = "SELECT * FROM ordini ORDER BY data_ordine DESC";
-
-        try (
-            Connection connessione = ConnessioneDatabase.getConnessione();
-            PreparedStatement statement = connessione.prepareStatement(sql);
-            ResultSet risultato = statement.executeQuery()
-        ) {
-            while (risultato.next()) {
-                Ordine ordine = new Ordine();
-
-                ordine.setId(risultato.getInt("id"));
-                ordine.setIdUtente(risultato.getInt("id_utente"));
-                ordine.setTotale(risultato.getDouble("totale"));
-                ordine.setEmailConsegna(risultato.getString("email_consegna"));
-                ordine.setNoteConsegna(risultato.getString("note_consegna"));
-                ordine.setMetodoPagamento(risultato.getString("metodo_pagamento"));
-                ordine.setStato(risultato.getString("stato"));
-                ordine.setDataOrdine(risultato.getString("data_ordine"));
-
-                ordini.add(ordine);
-            }
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        return ordini;
-    }
     public ArrayList<Prodotto> cercaProdotti(String ricerca, String gioco, String categoria) {
         ArrayList<Prodotto> prodotti = new ArrayList<>();
 

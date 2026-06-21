@@ -23,11 +23,25 @@
         <h1 class="logo">SkinTrade</h1>
 
         <nav class="menu-principale">
-            <a href="${pageContext.request.contextPath}/index.jsp">Home</a>
-            <a href="${pageContext.request.contextPath}/catalogo">Catalogo</a>
-            <a href="${pageContext.request.contextPath}/carrello">Carrello</a>
-            <a href="${pageContext.request.contextPath}/logout">Logout</a>
-        </nav>
+    <a href="${pageContext.request.contextPath}/index.jsp">Home</a>
+    <a href="${pageContext.request.contextPath}/catalogo">Catalogo</a>
+    <a href="${pageContext.request.contextPath}/carrello">Carrello</a>
+
+    <% if (session.getAttribute("utenteLoggato") == null) { %>
+        <a href="${pageContext.request.contextPath}/login">Login</a>
+    <% } else { %>
+        <a href="${pageContext.request.contextPath}/storico-ordini">I miei ordini</a>
+
+        <%
+            modello.Utente utenteMenu = (modello.Utente) session.getAttribute("utenteLoggato");
+            if (utenteMenu != null && utenteMenu.isAdmin()) {
+        %>
+            <a href="${pageContext.request.contextPath}/admin/home">Admin</a>
+        <% } %>
+
+        <a href="${pageContext.request.contextPath}/logout">Logout</a>
+    <% } %>
+</nav>
     </div>
 </header>
 

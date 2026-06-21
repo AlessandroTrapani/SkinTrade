@@ -22,12 +22,13 @@
         <h1 class="logo">SkinTrade Admin</h1>
 
         <nav class="menu-principale">
-            <a href="${pageContext.request.contextPath}/admin/home">Dashboard</a>
-            <a href="${pageContext.request.contextPath}/admin/prodotti">Prodotti</a>
-            <a href="${pageContext.request.contextPath}/admin/ordini">Ordini</a>
-            <a href="${pageContext.request.contextPath}/index.jsp">Sito</a>
-            <a href="${pageContext.request.contextPath}/logout">Logout</a>
-        </nav>
+    <a href="${pageContext.request.contextPath}/admin/home">Dashboard</a>
+    <a href="${pageContext.request.contextPath}/admin/prodotti">Prodotti</a>
+    <a href="${pageContext.request.contextPath}/admin/ordini">Ordini</a>
+    <a href="${pageContext.request.contextPath}/catalogo">Catalogo sito</a>
+    <a href="${pageContext.request.contextPath}/index.jsp">Home sito</a>
+    <a href="${pageContext.request.contextPath}/logout">Logout</a>
+</nav>
     </div>
 </header>
 

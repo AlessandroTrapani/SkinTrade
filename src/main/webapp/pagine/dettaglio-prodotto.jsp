@@ -27,6 +27,14 @@
         <a href="${pageContext.request.contextPath}/login">Login</a>
     <% } else { %>
         <a href="${pageContext.request.contextPath}/storico-ordini">I miei ordini</a>
+
+        <%
+            modello.Utente utenteMenu = (modello.Utente) session.getAttribute("utenteLoggato");
+            if (utenteMenu != null && utenteMenu.isAdmin()) {
+        %>
+            <a href="${pageContext.request.contextPath}/admin/home">Admin</a>
+        <% } %>
+
         <a href="${pageContext.request.contextPath}/logout">Logout</a>
     <% } %>
 </nav>

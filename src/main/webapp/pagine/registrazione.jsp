@@ -18,11 +18,11 @@
         <h1 class="logo">SkinTrade</h1>
 
         <nav class="menu-principale">
-            <a href="${pageContext.request.contextPath}/index.jsp">Home</a>
-            <a href="${pageContext.request.contextPath}/catalogo">Catalogo</a>
-            <a href="${pageContext.request.contextPath}/carrello">Carrello</a>
-            <a href="${pageContext.request.contextPath}/login">Login</a>
-        </nav>
+    <a href="${pageContext.request.contextPath}/index.jsp">Home</a>
+    <a href="${pageContext.request.contextPath}/catalogo">Catalogo</a>
+    <a href="${pageContext.request.contextPath}/carrello">Carrello</a>
+    <a href="${pageContext.request.contextPath}/login">Login</a>
+</nav>
     </div>
 </header>
 
