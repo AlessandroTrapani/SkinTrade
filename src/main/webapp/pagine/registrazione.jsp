@@ -34,18 +34,22 @@
             <p class="messaggio-errore"><%= errore %></p>
         <% } %>
 
-        <form action="${pageContext.request.contextPath}/registrazione" method="post">
-            <label for="nome">Nome</label>
-            <input type="text" id="nome" name="nome">
+        <form id="formRegistrazione" action="${pageContext.request.contextPath}/registrazione" method="post">
+    <label for="nome">Nome</label>
+	<input type="text" id="nome" name="nome">
+	<span class="errore-campo" id="erroreNome"></span>
 
-            <label for="cognome">Cognome</label>
-            <input type="text" id="cognome" name="cognome">
+	<label for="cognome">Cognome</label>
+	<input type="text" id="cognome" name="cognome">
+	<span class="errore-campo" id="erroreCognome"></span>
 
-            <label for="email">Email</label>
-            <input type="email" id="email" name="email">
+	<label for="email">Email</label>
+	<input type="email" id="email" name="email">
+	<span class="errore-campo" id="erroreEmail"></span>
 
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password">
+	<label for="password">Password</label>
+	<input type="password" id="password" name="password">
+	<span class="errore-campo" id="errorePassword"></span>
 
             <button class="bottone" type="submit">Registrati</button>
         </form>
@@ -61,5 +65,6 @@
     <p>SkinTrade - Progetto Tecnologie Software per il Web</p>
 </footer>
 
+<script src="${pageContext.request.contextPath}/scripts/validazione-registrazione.js"></script>
 </body>
 </html>

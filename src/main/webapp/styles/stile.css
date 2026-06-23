@@ -465,3 +465,12 @@ body {
     }
 }
 
+.errore-campo {
+    display: block;
+    color: #dc2626;
+    font-size: 14px;
+    margin-top: -8px;
+    margin-bottom: 12px;
+}
+
+
