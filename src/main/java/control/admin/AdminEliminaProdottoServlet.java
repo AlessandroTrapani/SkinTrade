@@ -13,43 +13,43 @@ import model.Utente;
 
 @WebServlet("/admin/elimina-prodotto")
 public class AdminEliminaProdottoServlet extends HttpServlet {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    public AdminEliminaProdottoServlet() {
-        super();
-    }
+	public AdminEliminaProdottoServlet() {
+		super();
+	}
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
-        HttpSession sessione = request.getSession();
+		HttpSession sessione = request.getSession();
 
-        Utente utente = (Utente) sessione.getAttribute("utenteLoggato");
+		Utente utente = (Utente) sessione.getAttribute("utenteLoggato");
 
-        if (utente == null || !utente.isAdmin()) {
-            response.sendRedirect(request.getContextPath() + "/login");
-            return;
-        }
+		if (utente == null || !utente.isAdmin()) {
+			response.sendRedirect(request.getContextPath() + "/login");
+			return;
+		}
 
-        String idParametro = request.getParameter("id");
+		String idParametro = request.getParameter("id");
 
-        if (idParametro == null || idParametro.trim().equals("")) {
-            response.sendRedirect(request.getContextPath() + "/admin/prodotti");
-            return;
-        }
+		if (idParametro == null || idParametro.trim().equals("")) {
+			response.sendRedirect(request.getContextPath() + "/admin/prodotti");
+			return;
+		}
 
-        int idProdotto;
+		int idProdotto;
 
-        try {
-            idProdotto = Integer.parseInt(idParametro);
-        } catch (NumberFormatException e) {
-            response.sendRedirect(request.getContextPath() + "/admin/prodotti");
-            return;
-        }
+		try {
+			idProdotto = Integer.parseInt(idParametro);
+		} catch (NumberFormatException e) {
+			response.sendRedirect(request.getContextPath() + "/admin/prodotti");
+			return;
+		}
 
-        ProdottoDAO prodottoDAO = new ProdottoDAO();
-        prodottoDAO.elimina(idProdotto);
+		ProdottoDAO prodottoDAO = new ProdottoDAO();
+		prodottoDAO.elimina(idProdotto);
 
-        response.sendRedirect(request.getContextPath() + "/admin/prodotti");
-    }
+		response.sendRedirect(request.getContextPath() + "/admin/prodotti");
+	}
 }

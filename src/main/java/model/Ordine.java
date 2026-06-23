@@ -1,86 +1,79 @@
 package model;
 
 public class Ordine {
-    private int id;
-    private int idUtente;
-    private double totale;
-    private String emailConsegna;
-    private String noteConsegna;
-    private String metodoPagamento;
-    private String stato;
-    private String dataOrdine;
+	private int id;
+	private int idUtente;
+	private double totale;
+	private String emailConsegna;
+	private String noteConsegna;
+	private String metodoPagamento;
+	private String stato;
+	private String dataOrdine;
 
-    public Ordine() {
-    }
+	public Ordine() {
+	}
 
-    public int getId() {
-        return id;
-    }
+	public int getId() {
+		return id;
+	}
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
 
+	public int getIdUtente() {
+		return idUtente;
+	}
 
-    public int getIdUtente() {
-        return idUtente;
-    }
+	public void setIdUtente(int idUtente) {
+		this.idUtente = idUtente;
+	}
 
-    public void setIdUtente(int idUtente) {
-        this.idUtente = idUtente;
-    }
+	public double getTotale() {
+		return totale;
+	}
 
+	public void setTotale(double totale) {
+		this.totale = totale;
+	}
 
-    public double getTotale() {
-        return totale;
-    }
+	public String getEmailConsegna() {
+		return emailConsegna;
+	}
 
-    public void setTotale(double totale) {
-        this.totale = totale;
-    }
+	public void setEmailConsegna(String emailConsegna) {
+		this.emailConsegna = emailConsegna;
+	}
 
+	public String getNoteConsegna() {
+		return noteConsegna;
+	}
 
-    public String getEmailConsegna() {
-        return emailConsegna;
-    }
+	public void setNoteConsegna(String noteConsegna) {
+		this.noteConsegna = noteConsegna;
+	}
 
-    public void setEmailConsegna(String emailConsegna) {
-        this.emailConsegna = emailConsegna;
-    }
+	public String getMetodoPagamento() {
+		return metodoPagamento;
+	}
 
+	public void setMetodoPagamento(String metodoPagamento) {
+		this.metodoPagamento = metodoPagamento;
+	}
 
-    public String getNoteConsegna() {
-        return noteConsegna;
-    }
+	public String getStato() {
+		return stato;
+	}
 
-    public void setNoteConsegna(String noteConsegna) {
-        this.noteConsegna = noteConsegna;
-    }
+	public void setStato(String stato) {
+		this.stato = stato;
+	}
 
+	public String getDataOrdine() {
+		return dataOrdine;
+	}
 
-    public String getMetodoPagamento() {
-        return metodoPagamento;
-    }
-
-    public void setMetodoPagamento(String metodoPagamento) {
-        this.metodoPagamento = metodoPagamento;
-    }
-
-
-    public String getStato() {
-        return stato;
-    }
-
-    public void setStato(String stato) {
-        this.stato = stato;
-    }
-
-
-    public String getDataOrdine() {
-        return dataOrdine;
-    }
-
-    public void setDataOrdine(String dataOrdine) {
-        this.dataOrdine = dataOrdine;
-    }
+	public void setDataOrdine(String dataOrdine) {
+		this.dataOrdine = dataOrdine;
+	}
 }

@@ -16,30 +16,30 @@ import model.Utente;
 
 @WebServlet("/admin/prodotti")
 public class AdminProdottiServlet extends HttpServlet {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    public AdminProdottiServlet() {
-        super();
-    }
+	public AdminProdottiServlet() {
+		super();
+	}
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
-        HttpSession sessione = request.getSession();
+		HttpSession sessione = request.getSession();
 
-        Utente utente = (Utente) sessione.getAttribute("utenteLoggato");
+		Utente utente = (Utente) sessione.getAttribute("utenteLoggato");
 
-        if (utente == null || !utente.isAdmin()) {
-            response.sendRedirect(request.getContextPath() + "/login");
-            return;
-        }
+		if (utente == null || !utente.isAdmin()) {
+			response.sendRedirect(request.getContextPath() + "/login");
+			return;
+		}
 
-        ProdottoDAO prodottoDAO = new ProdottoDAO();
-        ArrayList<Prodotto> prodotti = prodottoDAO.trovaTuttiAdmin();
+		ProdottoDAO prodottoDAO = new ProdottoDAO();
+		ArrayList<Prodotto> prodotti = prodottoDAO.trovaTuttiAdmin();
 
-        request.setAttribute("prodotti", prodotti);
+		request.setAttribute("prodotti", prodotti);
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/admin/prodotti.jsp");
-        dispatcher.forward(request, response);
-    }
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/admin/prodotti.jsp");
+		dispatcher.forward(request, response);
+	}
 }

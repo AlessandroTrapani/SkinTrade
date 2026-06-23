@@ -11,21 +11,21 @@ import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/logout")
 public class LogoutServlet extends HttpServlet {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    public LogoutServlet() {
-        super();
-    }
+	public LogoutServlet() {
+		super();
+	}
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
-        HttpSession sessione = request.getSession(false);
+		HttpSession sessione = request.getSession(false);
 
-        if (sessione != null) {
-            sessione.invalidate();
-        }
+		if (sessione != null) {
+			sessione.invalidate();
+		}
 
-        response.sendRedirect(request.getContextPath() + "/index.jsp");
-    }
+		response.sendRedirect(request.getContextPath() + "/index.jsp");
+	}
 }

@@ -14,50 +14,50 @@ import model.Utente;
 
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    public LoginServlet() {
-        super();
-    }
+	public LoginServlet() {
+		super();
+	}
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/pagine/login.jsp");
-        dispatcher.forward(request, response);
-    }
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/pagine/login.jsp");
+		dispatcher.forward(request, response);
+	}
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
+		String email = request.getParameter("email");
+		String password = request.getParameter("password");
 
-        if (email == null || email.trim().equals("") || password == null || password.trim().equals("")) {
-            request.setAttribute("errore", "Inserisci email e password.");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/pagine/login.jsp");
-            dispatcher.forward(request, response);
-            return;
-        }
+		if (email == null || email.trim().equals("") || password == null || password.trim().equals("")) {
+			request.setAttribute("errore", "Inserisci email e password.");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/pagine/login.jsp");
+			dispatcher.forward(request, response);
+			return;
+		}
 
-        UtenteDAO utenteDAO = new UtenteDAO();
-        Utente utente = utenteDAO.trovaPerEmailEPassword(email.trim(), password);
+		UtenteDAO utenteDAO = new UtenteDAO();
+		Utente utente = utenteDAO.trovaPerEmailEPassword(email.trim(), password);
 
-        if (utente == null) {
-            request.setAttribute("errore", "Credenziali non valide.");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/pagine/login.jsp");
-            dispatcher.forward(request, response);
-            return;
-        }
+		if (utente == null) {
+			request.setAttribute("errore", "Credenziali non valide.");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/pagine/login.jsp");
+			dispatcher.forward(request, response);
+			return;
+		}
 
-        HttpSession sessione = request.getSession();
-        sessione.setAttribute("utenteLoggato", utente);
-        sessione.setAttribute("tokenAccesso", "TOKEN_VALIDO");
+		HttpSession sessione = request.getSession();
+		sessione.setAttribute("utenteLoggato", utente);
+		sessione.setAttribute("tokenAccesso", "TOKEN_VALIDO");
 
-        if (utente.isAdmin()) {
-            response.sendRedirect(request.getContextPath() + "/admin/home");
-        } else {
-            response.sendRedirect(request.getContextPath() + "/index.jsp");
-        }
-    }
+		if (utente.isAdmin()) {
+			response.sendRedirect(request.getContextPath() + "/admin/home");
+		} else {
+			response.sendRedirect(request.getContextPath() + "/index.jsp");
+		}
+	}
 }

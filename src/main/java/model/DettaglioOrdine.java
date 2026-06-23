@@ -1,70 +1,65 @@
 package model;
 
 public class DettaglioOrdine {
-    private int id;
-    private int idOrdine;
-    private int idProdotto;
-    private String nomeProdotto;
-    private double prezzo;
-    private int quantita;
+	private int id;
+	private int idOrdine;
+	private int idProdotto;
+	private String nomeProdotto;
+	private double prezzo;
+	private int quantita;
 
-    public DettaglioOrdine() {
-    }
+	public DettaglioOrdine() {
+	}
 
-    public int getId() {
-        return id;
-    }
+	public int getId() {
+		return id;
+	}
 
-    public void setId(int id) {
-        this.id = id;
-    }
+	public void setId(int id) {
+		this.id = id;
+	}
 
+	public int getIdOrdine() {
+		return idOrdine;
+	}
 
-    public int getIdOrdine() {
-        return idOrdine;
-    }
+	public void setIdOrdine(int idOrdine) {
+		this.idOrdine = idOrdine;
+	}
 
-    public void setIdOrdine(int idOrdine) {
-        this.idOrdine = idOrdine;
-    }
+	public int getIdProdotto() {
+		return idProdotto;
+	}
 
+	public void setIdProdotto(int idProdotto) {
+		this.idProdotto = idProdotto;
+	}
 
-    public int getIdProdotto() {
-        return idProdotto;
-    }
+	public String getNomeProdotto() {
+		return nomeProdotto;
+	}
 
-    public void setIdProdotto(int idProdotto) {
-        this.idProdotto = idProdotto;
-    }
+	public void setNomeProdotto(String nomeProdotto) {
+		this.nomeProdotto = nomeProdotto;
+	}
 
+	public double getPrezzo() {
+		return prezzo;
+	}
 
-    public String getNomeProdotto() {
-        return nomeProdotto;
-    }
+	public void setPrezzo(double prezzo) {
+		this.prezzo = prezzo;
+	}
 
-    public void setNomeProdotto(String nomeProdotto) {
-        this.nomeProdotto = nomeProdotto;
-    }
+	public int getQuantita() {
+		return quantita;
+	}
 
+	public void setQuantita(int quantita) {
+		this.quantita = quantita;
+	}
 
-    public double getPrezzo() {
-        return prezzo;
-    }
-
-    public void setPrezzo(double prezzo) {
-        this.prezzo = prezzo;
-    }
-
-
-    public int getQuantita() {
-        return quantita;
-    }
-
-    public void setQuantita(int quantita) {
-        this.quantita = quantita;
-    }
-
-    public double getTotaleRiga() {
-        return prezzo * quantita;
-    }
+	public double getTotaleRiga() {
+		return prezzo * quantita;
+	}
 }

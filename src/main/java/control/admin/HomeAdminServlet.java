@@ -11,16 +11,16 @@ import jakarta.servlet.http.HttpServletResponse;
 
 @WebServlet("/admin/home")
 public class HomeAdminServlet extends HttpServlet {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    public HomeAdminServlet() {
-        super();
-    }
+	public HomeAdminServlet() {
+		super();
+	}
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/admin/home.jsp");
-        dispatcher.forward(request, response);
-    }
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/admin/home.jsp");
+		dispatcher.forward(request, response);
+	}
 }

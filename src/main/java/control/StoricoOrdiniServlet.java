@@ -16,30 +16,30 @@ import model.Utente;
 
 @WebServlet("/storico-ordini")
 public class StoricoOrdiniServlet extends HttpServlet {
-    private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 1L;
 
-    public StoricoOrdiniServlet() {
-        super();
-    }
+	public StoricoOrdiniServlet() {
+		super();
+	}
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
-        HttpSession sessione = request.getSession();
+		HttpSession sessione = request.getSession();
 
-        Utente utente = (Utente) sessione.getAttribute("utenteLoggato");
+		Utente utente = (Utente) sessione.getAttribute("utenteLoggato");
 
-        if (utente == null) {
-            response.sendRedirect(request.getContextPath() + "/login");
-            return;
-        }
+		if (utente == null) {
+			response.sendRedirect(request.getContextPath() + "/login");
+			return;
+		}
 
-        OrdineDAO ordineDAO = new OrdineDAO();
-        ArrayList<Ordine> ordini = ordineDAO.trovaOrdiniPerUtente(utente.getId());
+		OrdineDAO ordineDAO = new OrdineDAO();
+		ArrayList<Ordine> ordini = ordineDAO.trovaOrdiniPerUtente(utente.getId());
 
-        request.setAttribute("ordini", ordini);
+		request.setAttribute("ordini", ordini);
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/pagine/storico-ordini.jsp");
-        dispatcher.forward(request, response);
-    }
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/pagine/storico-ordini.jsp");
+		dispatcher.forward(request, response);
+	}
 }
