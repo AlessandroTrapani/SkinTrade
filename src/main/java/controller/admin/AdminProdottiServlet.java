@@ -39,7 +39,7 @@ public class AdminProdottiServlet extends HttpServlet {
 
         request.setAttribute("prodotti", prodotti);
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/prodotti.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/admin/prodotti.jsp");
         dispatcher.forward(request, response);
     }
 }

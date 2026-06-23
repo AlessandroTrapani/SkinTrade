@@ -20,7 +20,7 @@ public class HomeAdminServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/home.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/admin/home.jsp");
         dispatcher.forward(request, response);
     }
 }

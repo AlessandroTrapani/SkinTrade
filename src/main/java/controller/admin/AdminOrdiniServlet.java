@@ -48,7 +48,7 @@ public class AdminOrdiniServlet extends HttpServlet {
         request.setAttribute("idUtente", idUtente);
         request.setAttribute("emailConsegna", emailConsegna);
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/ordini.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/admin/ordini.jsp");
         dispatcher.forward(request, response);
     }
 }

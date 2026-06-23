@@ -65,7 +65,7 @@ public class AdminDettaglioOrdineServlet extends HttpServlet {
         request.setAttribute("ordine", ordine);
         request.setAttribute("dettagli", dettagli);
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/dettaglio-ordine.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/admin/dettaglio-ordine.jsp");
         dispatcher.forward(request, response);
     }
 }	

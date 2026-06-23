@@ -24,7 +24,7 @@ public class CarrelloServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/pagine/carrello.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/pagine/carrello.jsp");
         dispatcher.forward(request, response);
     }
 

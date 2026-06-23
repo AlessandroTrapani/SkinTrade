@@ -33,7 +33,7 @@ public class AdminNuovoProdottoServlet extends HttpServlet {
             return;
         }
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/nuovo-prodotto.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/admin/nuovo-prodotto.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -66,7 +66,7 @@ public class AdminNuovoProdottoServlet extends HttpServlet {
                 || quantitaParametro == null || quantitaParametro.trim().equals("")) {
 
             request.setAttribute("errore", "Compila tutti i campi obbligatori.");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/nuovo-prodotto.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/admin/nuovo-prodotto.jsp");
             dispatcher.forward(request, response);
             return;
         }
@@ -79,14 +79,14 @@ public class AdminNuovoProdottoServlet extends HttpServlet {
             quantita = Integer.parseInt(quantitaParametro);
         } catch (NumberFormatException e) {
             request.setAttribute("errore", "Prezzo e quantità devono essere valori numerici.");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/nuovo-prodotto.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/admin/nuovo-prodotto.jsp");
             dispatcher.forward(request, response);
             return;
         }
 
         if (prezzo < 0 || quantita < 0) {
             request.setAttribute("errore", "Prezzo e quantità non possono essere negativi.");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/nuovo-prodotto.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/admin/nuovo-prodotto.jsp");
             dispatcher.forward(request, response);
             return;
         }
@@ -107,7 +107,7 @@ public class AdminNuovoProdottoServlet extends HttpServlet {
 
         if (!salvato) {
             request.setAttribute("errore", "Errore durante il salvataggio del prodotto.");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/nuovo-prodotto.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/admin/nuovo-prodotto.jsp");
             dispatcher.forward(request, response);
             return;
         }

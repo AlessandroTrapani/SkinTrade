@@ -23,7 +23,7 @@ public class RegistrazioneServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/pagine/registrazione.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/pagine/registrazione.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -41,7 +41,7 @@ public class RegistrazioneServlet extends HttpServlet {
                 || password == null || password.trim().equals("")) {
 
             request.setAttribute("errore", "Compila tutti i campi.");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/pagine/registrazione.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/pagine/registrazione.jsp");
             dispatcher.forward(request, response);
             return;
         }
@@ -50,7 +50,7 @@ public class RegistrazioneServlet extends HttpServlet {
 
         if (utenteDAO.emailEsistente(email.trim())) {
             request.setAttribute("errore", "Email già registrata.");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/pagine/registrazione.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/pagine/registrazione.jsp");
             dispatcher.forward(request, response);
             return;
         }
@@ -66,7 +66,7 @@ public class RegistrazioneServlet extends HttpServlet {
 
         if (!salvato) {
             request.setAttribute("errore", "Errore durante la registrazione.");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/pagine/registrazione.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/pagine/registrazione.jsp");
             dispatcher.forward(request, response);
             return;
         }

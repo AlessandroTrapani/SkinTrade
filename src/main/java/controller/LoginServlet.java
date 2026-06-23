@@ -23,7 +23,7 @@ public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/pagine/login.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/pagine/login.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -35,7 +35,7 @@ public class LoginServlet extends HttpServlet {
 
         if (email == null || email.trim().equals("") || password == null || password.trim().equals("")) {
             request.setAttribute("errore", "Inserisci email e password.");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/pagine/login.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/pagine/login.jsp");
             dispatcher.forward(request, response);
             return;
         }
@@ -45,7 +45,7 @@ public class LoginServlet extends HttpServlet {
 
         if (utente == null) {
             request.setAttribute("errore", "Credenziali non valide.");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/pagine/login.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/pagine/login.jsp");
             dispatcher.forward(request, response);
             return;
         }

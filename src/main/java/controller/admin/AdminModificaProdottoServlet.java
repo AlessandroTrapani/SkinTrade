@@ -59,7 +59,7 @@ public class AdminModificaProdottoServlet extends HttpServlet {
 
         request.setAttribute("prodotto", prodotto);
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/modifica-prodotto.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/admin/modifica-prodotto.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -94,7 +94,7 @@ public class AdminModificaProdottoServlet extends HttpServlet {
                 || quantitaParametro == null || quantitaParametro.trim().equals("")) {
 
             request.setAttribute("errore", "Compila tutti i campi obbligatori.");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/modifica-prodotto.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/admin/modifica-prodotto.jsp");
             dispatcher.forward(request, response);
             return;
         }
@@ -109,14 +109,14 @@ public class AdminModificaProdottoServlet extends HttpServlet {
             quantita = Integer.parseInt(quantitaParametro);
         } catch (NumberFormatException e) {
             request.setAttribute("errore", "ID, prezzo e quantità devono essere valori numerici.");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/modifica-prodotto.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/admin/modifica-prodotto.jsp");
             dispatcher.forward(request, response);
             return;
         }
 
         if (prezzo < 0 || quantita < 0) {
             request.setAttribute("errore", "Prezzo e quantità non possono essere negativi.");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/modifica-prodotto.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/admin/modifica-prodotto.jsp");
             dispatcher.forward(request, response);
             return;
         }
@@ -140,7 +140,7 @@ public class AdminModificaProdottoServlet extends HttpServlet {
             request.setAttribute("errore", "Errore durante la modifica del prodotto.");
             request.setAttribute("prodotto", prodotto);
 
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/admin/modifica-prodotto.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/admin/modifica-prodotto.jsp");
             dispatcher.forward(request, response);
             return;
         }

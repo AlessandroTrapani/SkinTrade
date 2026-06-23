@@ -40,7 +40,7 @@ public class CheckoutServlet extends HttpServlet {
             return;
         }
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/pagine/checkout.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/pagine/checkout.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -77,20 +77,20 @@ public class CheckoutServlet extends HttpServlet {
                 || cvv == null || cvv.trim().equals("")) {
 
             request.setAttribute("errore", "Compila tutti i campi obbligatori, inclusi i dati di pagamento.");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/pagine/checkout.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/pagine/checkout.jsp");
             dispatcher.forward(request, response);
             return;
         }
         if (!numeroCarta.matches("\\d{16}")) {
             request.setAttribute("errore", "Il numero carta deve contenere 16 cifre.");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/pagine/checkout.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/pagine/checkout.jsp");
             dispatcher.forward(request, response);
             return;
         }
 
         if (!cvv.matches("\\d{3}")) {
             request.setAttribute("errore", "Il CVV deve contenere 3 cifre.");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/pagine/checkout.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/pagine/checkout.jsp");
             dispatcher.forward(request, response);
             return;
         }
@@ -107,7 +107,7 @@ public class CheckoutServlet extends HttpServlet {
 
         if (!salvato) {
             request.setAttribute("errore", "Errore durante il salvataggio dell'ordine.");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/pagine/checkout.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/pagine/checkout.jsp");
             dispatcher.forward(request, response);
             return;
         }

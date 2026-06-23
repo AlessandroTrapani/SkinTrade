@@ -35,7 +35,7 @@ public class CatalogoServlet extends HttpServlet {
         request.setAttribute("gioco", gioco);
         request.setAttribute("categoria", categoria);
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/pagine/catalogo.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/pagine/catalogo.jsp");
         dispatcher.forward(request, response);
     }
 }

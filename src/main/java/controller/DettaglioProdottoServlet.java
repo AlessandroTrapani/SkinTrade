@@ -48,7 +48,7 @@ public class DettaglioProdottoServlet extends HttpServlet {
 
         request.setAttribute("prodotto", prodotto);
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/pagine/dettaglio-prodotto.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/pagine/dettaglio-prodotto.jsp");
         dispatcher.forward(request, response);
     }
 }
