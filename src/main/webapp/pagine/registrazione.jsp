@@ -34,7 +34,7 @@
             <p class="messaggio-errore"><%= errore %></p>
         <% } %>
 
-        <form id="formRegistrazione" action="${pageContext.request.contextPath}/registrazione" method="post">
+    <form id="formRegistrazione" action="${pageContext.request.contextPath}/registrazione" method="post"  data-context-path="${pageContext.request.contextPath}">
     <label for="nome">Nome</label>
 	<input type="text" id="nome" name="nome">
 	<span class="errore-campo" id="erroreNome"></span>

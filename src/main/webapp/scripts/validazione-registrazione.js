@@ -5,6 +5,8 @@ document.addEventListener("DOMContentLoaded", function () {
         return;
     }
 
+    const contextPath = form.getAttribute("data-context-path");
+
     const nome = document.getElementById("nome");
     const cognome = document.getElementById("cognome");
     const email = document.getElementById("email");
@@ -14,6 +16,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const erroreCognome = document.getElementById("erroreCognome");
     const erroreEmail = document.getElementById("erroreEmail");
     const errorePassword = document.getElementById("errorePassword");
+
+    let emailDisponibile = false;
 
     const regexNome = /^[A-Za-zÀ-ÿ\s]{2,50}$/;
     const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -39,14 +43,45 @@ document.addEventListener("DOMContentLoaded", function () {
         return true;
     }
 
-    function validaEmail() {
+    function validaEmailFormato() {
         if (!regexEmail.test(email.value.trim())) {
             erroreEmail.textContent = "Inserisci un indirizzo email valido.";
+            emailDisponibile = false;
             return false;
         }
 
         erroreEmail.textContent = "";
         return true;
+    }
+
+    function verificaEmailAjax() {
+        if (!validaEmailFormato()) {
+            return;
+        }
+
+        fetch(contextPath + "/verifica-email?email=" + encodeURIComponent(email.value.trim()))
+            .then(function (response) {
+                return response.json();
+            })
+            .then(function (data) {
+                erroreEmail.textContent = data.messaggio;
+
+                if (data.valida) {
+                    erroreEmail.classList.remove("errore-campo");
+                    erroreEmail.classList.add("messaggio-ok-campo");
+                    emailDisponibile = true;
+                } else {
+                    erroreEmail.classList.remove("messaggio-ok-campo");
+                    erroreEmail.classList.add("errore-campo");
+                    emailDisponibile = false;
+                }
+            })
+            .catch(function () {
+                erroreEmail.textContent = "Errore durante la verifica dell'email.";
+                erroreEmail.classList.remove("messaggio-ok-campo");
+                erroreEmail.classList.add("errore-campo");
+                emailDisponibile = false;
+            });
     }
 
     function validaPassword() {
@@ -61,17 +96,23 @@ document.addEventListener("DOMContentLoaded", function () {
 
     nome.addEventListener("change", validaNome);
     cognome.addEventListener("change", validaCognome);
-    email.addEventListener("change", validaEmail);
+    email.addEventListener("change", verificaEmailAjax);
     password.addEventListener("change", validaPassword);
 
     form.addEventListener("submit", function (event) {
         const nomeValido = validaNome();
         const cognomeValido = validaCognome();
-        const emailValida = validaEmail();
+        const emailFormatoValido = validaEmailFormato();
         const passwordValida = validaPassword();
 
-        if (!nomeValido || !cognomeValido || !emailValida || !passwordValida) {
+        if (!nomeValido || !cognomeValido || !emailFormatoValido || !passwordValida || !emailDisponibile) {
             event.preventDefault();
+
+            if (emailFormatoValido && !emailDisponibile) {
+                erroreEmail.textContent = "Verifica che l'email sia disponibile prima di registrarti.";
+                erroreEmail.classList.remove("messaggio-ok-campo");
+                erroreEmail.classList.add("errore-campo");
+            }
         }
     });
 });
