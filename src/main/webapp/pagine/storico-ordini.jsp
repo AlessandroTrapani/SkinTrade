@@ -11,7 +11,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Storico ordini - SkinTrade</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/stile.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/stile.css">
 </head>
 <body>
 

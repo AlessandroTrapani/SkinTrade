@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>SkinTrade</title>
-    <link rel="stylesheet" href="css/stile.css">
+    <link rel="stylesheet" href="styles/stile.css">
 </head>
 <body>
 

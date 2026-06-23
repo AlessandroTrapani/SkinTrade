@@ -15,7 +15,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Catalogo - SkinTrade</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/stile.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/stile.css">
 </head>
 <body>
 
@@ -108,7 +108,7 @@
                     <div class="immagine-prodotto">
     <% if (prodotto.getImmagine() != null && !prodotto.getImmagine().trim().equals("")) { %>
         <img 
-            src="${pageContext.request.contextPath}/immagini/prodotti/<%= prodotto.getImmagine() %>" 
+            src="${pageContext.request.contextPath}/images/prodotti/<%= prodotto.getImmagine() %>" 
             alt="<%= prodotto.getNome() %>"
         >
     <% } else { %>

@@ -11,7 +11,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Modifica prodotto - SkinTrade Admin</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/stile.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/styles/stile.css">
 </head>
 <body>
 
