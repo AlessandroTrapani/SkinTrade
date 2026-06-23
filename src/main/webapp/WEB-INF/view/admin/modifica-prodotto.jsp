@@ -1,5 +1,5 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ page import="modello.Prodotto" %>
+<%@ page import="model.Prodotto" %>
 
 <%
     Prodotto prodotto = (Prodotto) request.getAttribute("prodotto");

@@ -1,40 +1,31 @@
-package controller.admin;
+package control;
 
 import java.io.IOException;
 
 import dao.ProdottoDAO;
+import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import modello.Utente;
+import model.Prodotto;
 
-@WebServlet("/admin/elimina-prodotto")
-public class AdminEliminaProdottoServlet extends HttpServlet {
+@WebServlet("/dettaglio-prodotto")
+public class DettaglioProdottoServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    public AdminEliminaProdottoServlet() {
+    public DettaglioProdottoServlet() {
         super();
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        HttpSession sessione = request.getSession();
-
-        Utente utente = (Utente) sessione.getAttribute("utenteLoggato");
-
-        if (utente == null || !utente.isAdmin()) {
-            response.sendRedirect(request.getContextPath() + "/login");
-            return;
-        }
-
         String idParametro = request.getParameter("id");
 
         if (idParametro == null || idParametro.trim().equals("")) {
-            response.sendRedirect(request.getContextPath() + "/admin/prodotti");
+            response.sendRedirect(request.getContextPath() + "/catalogo");
             return;
         }
 
@@ -43,13 +34,21 @@ public class AdminEliminaProdottoServlet extends HttpServlet {
         try {
             idProdotto = Integer.parseInt(idParametro);
         } catch (NumberFormatException e) {
-            response.sendRedirect(request.getContextPath() + "/admin/prodotti");
+            response.sendRedirect(request.getContextPath() + "/catalogo");
             return;
         }
 
         ProdottoDAO prodottoDAO = new ProdottoDAO();
-        prodottoDAO.elimina(idProdotto);
+        Prodotto prodotto = prodottoDAO.trovaPerId(idProdotto);
 
-        response.sendRedirect(request.getContextPath() + "/admin/prodotti");
+        if (prodotto == null) {
+            response.sendRedirect(request.getContextPath() + "/catalogo");
+            return;
+        }
+
+        request.setAttribute("prodotto", prodotto);
+
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/pagine/dettaglio-prodotto.jsp");
+        dispatcher.forward(request, response);
     }
 }

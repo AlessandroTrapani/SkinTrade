@@ -1,4 +1,4 @@
-package modello;
+package model;
 
 public class DettaglioOrdine {
     private int id;

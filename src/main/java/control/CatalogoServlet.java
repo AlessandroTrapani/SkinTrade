@@ -1,4 +1,4 @@
-package controller.admin;
+package control;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -10,36 +10,32 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
-import modello.Prodotto;
-import modello.Utente;
+import model.Prodotto;
 
-@WebServlet("/admin/prodotti")
-public class AdminProdottiServlet extends HttpServlet {
+@WebServlet("/catalogo")
+public class CatalogoServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    public AdminProdottiServlet() {
+    public CatalogoServlet() {
         super();
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        HttpSession sessione = request.getSession();
-
-        Utente utente = (Utente) sessione.getAttribute("utenteLoggato");
-
-        if (utente == null || !utente.isAdmin()) {
-            response.sendRedirect(request.getContextPath() + "/login");
-            return;
-        }
+        String ricerca = request.getParameter("ricerca");
+        String gioco = request.getParameter("gioco");
+        String categoria = request.getParameter("categoria");
 
         ProdottoDAO prodottoDAO = new ProdottoDAO();
-        ArrayList<Prodotto> prodotti = prodottoDAO.trovaTuttiAdmin();
+        ArrayList<Prodotto> prodotti = prodottoDAO.cercaProdotti(ricerca, gioco, categoria);
 
         request.setAttribute("prodotti", prodotti);
+        request.setAttribute("ricerca", ricerca);
+        request.setAttribute("gioco", gioco);
+        request.setAttribute("categoria", categoria);
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/admin/prodotti.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/pagine/catalogo.jsp");
         dispatcher.forward(request, response);
     }
 }

@@ -1,9 +1,9 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ page import="modello.Carrello" %>
-<%@ page import="modello.ElementoCarrello" %>
+<%@ page import="model.Carrello" %>
+<%@ page import="model.ElementoCarrello" %>
 
 <%
-    Carrello carrello = (Carrello) session.getAttribute("carrello");
+Carrello carrello = (Carrello) session.getAttribute("carrello");
 %>
 
 <!DOCTYPE html>
@@ -24,14 +24,18 @@
     <a href="${pageContext.request.contextPath}/catalogo">Catalogo</a>
     <a href="${pageContext.request.contextPath}/carrello">Carrello</a>
 
-    <% if (session.getAttribute("utenteLoggato") == null) { %>
+    <%
+    if (session.getAttribute("utenteLoggato") == null) {
+    %>
         <a href="${pageContext.request.contextPath}/login">Login</a>
-    <% } else { %>
+    <%
+    } else {
+    %>
         <a href="${pageContext.request.contextPath}/storico-ordini">I miei ordini</a>
 
         <%
-            modello.Utente utenteMenu = (modello.Utente) session.getAttribute("utenteLoggato");
-            if (utenteMenu != null && utenteMenu.isAdmin()) {
+        model.Utente utenteMenu = (model.Utente) session.getAttribute("utenteLoggato");
+                    if (utenteMenu != null && utenteMenu.isAdmin()) {
         %>
             <a href="${pageContext.request.contextPath}/admin/home">Admin</a>
         <% } %>

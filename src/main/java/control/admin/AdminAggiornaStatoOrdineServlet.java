@@ -1,4 +1,4 @@
-package controller.admin;
+package control.admin;
 
 import java.io.IOException;
 
@@ -9,7 +9,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import modello.Utente;
+import model.Utente;
 
 @WebServlet("/admin/aggiorna-stato-ordine")
 public class AdminAggiornaStatoOrdineServlet extends HttpServlet {

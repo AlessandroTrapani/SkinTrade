@@ -1,9 +1,9 @@
-package controller;
+package control.admin;
 
 import java.io.IOException;
 import java.util.ArrayList;
 
-import dao.OrdineDAO;
+import dao.ProdottoDAO;
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -11,14 +11,14 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import modello.Ordine;
-import modello.Utente;
+import model.Prodotto;
+import model.Utente;
 
-@WebServlet("/storico-ordini")
-public class StoricoOrdiniServlet extends HttpServlet {
+@WebServlet("/admin/prodotti")
+public class AdminProdottiServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    public StoricoOrdiniServlet() {
+    public AdminProdottiServlet() {
         super();
     }
 
@@ -29,17 +29,17 @@ public class StoricoOrdiniServlet extends HttpServlet {
 
         Utente utente = (Utente) sessione.getAttribute("utenteLoggato");
 
-        if (utente == null) {
+        if (utente == null || !utente.isAdmin()) {
             response.sendRedirect(request.getContextPath() + "/login");
             return;
         }
 
-        OrdineDAO ordineDAO = new OrdineDAO();
-        ArrayList<Ordine> ordini = ordineDAO.trovaOrdiniPerUtente(utente.getId());
+        ProdottoDAO prodottoDAO = new ProdottoDAO();
+        ArrayList<Prodotto> prodotti = prodottoDAO.trovaTuttiAdmin();
 
-        request.setAttribute("ordini", ordini);
+        request.setAttribute("prodotti", prodotti);
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/pagine/storico-ordini.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/admin/prodotti.jsp");
         dispatcher.forward(request, response);
     }
 }

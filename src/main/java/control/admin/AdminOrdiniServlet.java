@@ -1,4 +1,4 @@
-package controller.admin;
+package control.admin;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,8 +11,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import modello.Ordine;
-import modello.Utente;
+import model.Ordine;
+import model.Utente;
 
 @WebServlet("/admin/ordini")
 public class AdminOrdiniServlet extends HttpServlet {

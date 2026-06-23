@@ -1,9 +1,9 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="java.util.List" %>
-<%@ page import="modello.Prodotto" %>
+<%@ page import="model.Prodotto" %>
 
 <%
-    List<Prodotto> prodotti = (List<Prodotto>) request.getAttribute("prodotti");
+List<Prodotto> prodotti = (List<Prodotto>) request.getAttribute("prodotti");
 
     String ricerca = (String) request.getAttribute("ricerca");
     String giocoSelezionato = (String) request.getAttribute("gioco");
@@ -28,14 +28,18 @@
     <a href="${pageContext.request.contextPath}/catalogo">Catalogo</a>
     <a href="${pageContext.request.contextPath}/carrello">Carrello</a>
 
-    <% if (session.getAttribute("utenteLoggato") == null) { %>
+    <%
+    if (session.getAttribute("utenteLoggato") == null) {
+    %>
         <a href="${pageContext.request.contextPath}/login">Login</a>
-    <% } else { %>
+    <%
+    } else {
+    %>
         <a href="${pageContext.request.contextPath}/storico-ordini">I miei ordini</a>
 
         <%
-            modello.Utente utenteMenu = (modello.Utente) session.getAttribute("utenteLoggato");
-            if (utenteMenu != null && utenteMenu.isAdmin()) {
+        model.Utente utenteMenu = (model.Utente) session.getAttribute("utenteLoggato");
+                    if (utenteMenu != null && utenteMenu.isAdmin()) {
         %>
             <a href="${pageContext.request.contextPath}/admin/home">Admin</a>
         <% } %>

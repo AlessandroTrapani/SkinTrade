@@ -23,8 +23,8 @@
         <a href="${pageContext.request.contextPath}/storico-ordini">I miei ordini</a>
 
         <%
-            modello.Utente utenteMenu = (modello.Utente) session.getAttribute("utenteLoggato");
-            if (utenteMenu != null && utenteMenu.isAdmin()) {
+        model.Utente utenteMenu = (model.Utente) session.getAttribute("utenteLoggato");
+                    if (utenteMenu != null && utenteMenu.isAdmin()) {
         %>
             <a href="${pageContext.request.contextPath}/admin/home">Admin</a>
         <% } %>

@@ -5,12 +5,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import modello.Carrello;
-import modello.ElementoCarrello;
-import modello.Ordine;
+
+import model.Carrello;
+import model.DettaglioOrdine;
+import model.ElementoCarrello;
+import model.Ordine;
 import util.ConnessioneDatabase;
 import java.util.ArrayList;
-import modello.DettaglioOrdine;
 
 public class OrdineDAO {
 

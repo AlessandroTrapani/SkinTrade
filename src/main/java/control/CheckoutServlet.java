@@ -1,4 +1,4 @@
-package controller;
+package control;
 
 import java.io.IOException;
 
@@ -10,9 +10,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import modello.Carrello;
-import modello.Ordine;
-import modello.Utente;
+import model.Carrello;
+import model.Ordine;
+import model.Utente;
 
 @WebServlet("/checkout")
 public class CheckoutServlet extends HttpServlet {

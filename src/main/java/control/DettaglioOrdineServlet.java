@@ -1,4 +1,4 @@
-package controller.admin;
+package control;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -11,15 +11,15 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import modello.DettaglioOrdine;
-import modello.Ordine;
-import modello.Utente;
+import model.DettaglioOrdine;
+import model.Ordine;
+import model.Utente;
 
-@WebServlet("/admin/dettaglio-ordine")
-public class AdminDettaglioOrdineServlet extends HttpServlet {
+@WebServlet("/dettaglio-ordine")
+public class DettaglioOrdineServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
-    public AdminDettaglioOrdineServlet() {
+    public DettaglioOrdineServlet() {
         super();
     }
 
@@ -30,7 +30,7 @@ public class AdminDettaglioOrdineServlet extends HttpServlet {
 
         Utente utente = (Utente) sessione.getAttribute("utenteLoggato");
 
-        if (utente == null || !utente.isAdmin()) {
+        if (utente == null) {
             response.sendRedirect(request.getContextPath() + "/login");
             return;
         }
@@ -38,7 +38,7 @@ public class AdminDettaglioOrdineServlet extends HttpServlet {
         String idParametro = request.getParameter("id");
 
         if (idParametro == null || idParametro.trim().equals("")) {
-            response.sendRedirect(request.getContextPath() + "/admin/ordini");
+            response.sendRedirect(request.getContextPath() + "/storico-ordini");
             return;
         }
 
@@ -47,16 +47,16 @@ public class AdminDettaglioOrdineServlet extends HttpServlet {
         try {
             idOrdine = Integer.parseInt(idParametro);
         } catch (NumberFormatException e) {
-            response.sendRedirect(request.getContextPath() + "/admin/ordini");
+            response.sendRedirect(request.getContextPath() + "/storico-ordini");
             return;
         }
 
         OrdineDAO ordineDAO = new OrdineDAO();
 
-        Ordine ordine = ordineDAO.trovaOrdinePerId(idOrdine);
+        Ordine ordine = ordineDAO.trovaOrdinePerIdEUtente(idOrdine, utente.getId());
 
         if (ordine == null) {
-            response.sendRedirect(request.getContextPath() + "/admin/ordini");
+            response.sendRedirect(request.getContextPath() + "/storico-ordini");
             return;
         }
 
@@ -65,7 +65,7 @@ public class AdminDettaglioOrdineServlet extends HttpServlet {
         request.setAttribute("ordine", ordine);
         request.setAttribute("dettagli", dettagli);
 
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/admin/dettaglio-ordine.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/view/pagine/dettaglio-ordine.jsp");
         dispatcher.forward(request, response);
     }
-}	
+}

@@ -1,4 +1,4 @@
-package controller.admin;
+package control.admin;
 
 import java.io.IOException;
 
@@ -10,8 +10,8 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import modello.Prodotto;
-import modello.Utente;
+import model.Prodotto;
+import model.Utente;
 
 @WebServlet("/admin/modifica-prodotto")
 public class AdminModificaProdottoServlet extends HttpServlet {

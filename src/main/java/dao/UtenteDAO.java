@@ -5,7 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import modello.Utente;
+import model.Utente;
 import util.ConnessioneDatabase;
 
 public class UtenteDAO {

@@ -1,6 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="modello.Ordine" %>
+<%@ page import="model.Ordine" %>
 
 <%
     ArrayList<Ordine> ordini = (ArrayList<Ordine>) request.getAttribute("ordini");
@@ -30,7 +30,7 @@
         <a href="${pageContext.request.contextPath}/storico-ordini">I miei ordini</a>
 
         <%
-            modello.Utente utenteMenu = (modello.Utente) session.getAttribute("utenteLoggato");
+            model.Utente utenteMenu = (model.Utente) session.getAttribute("utenteLoggato");
             if (utenteMenu != null && utenteMenu.isAdmin()) {
         %>
             <a href="${pageContext.request.contextPath}/admin/home">Admin</a>

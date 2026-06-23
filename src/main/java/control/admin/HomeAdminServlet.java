@@ -1,4 +1,4 @@
-package controller.admin;
+package control.admin;
 
 import java.io.IOException;
 
