@@ -75,7 +75,8 @@ public class RegistrazioneServlet extends HttpServlet {
 
         HttpSession sessione = request.getSession();
         sessione.setAttribute("utenteLoggato", utenteLoggato);
-
+        sessione.setAttribute("tokenAccesso", "TOKEN_VALIDO");
+        
         response.sendRedirect(request.getContextPath() + "/index.jsp");
     }
 }

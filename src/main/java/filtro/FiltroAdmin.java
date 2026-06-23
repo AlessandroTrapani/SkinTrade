@@ -32,12 +32,14 @@ public class FiltroAdmin implements Filter {
         HttpSession sessione = richiesta.getSession(false);
 
         Utente utente = null;
+        String tokenAccesso = null;
 
         if (sessione != null) {
             utente = (Utente) sessione.getAttribute("utenteLoggato");
+            tokenAccesso = (String) sessione.getAttribute("tokenAccesso");
         }
 
-        if (utente == null || !utente.isAdmin()) {
+        if (utente == null || tokenAccesso == null || !"TOKEN_VALIDO".equals(tokenAccesso) || !utente.isAdmin()) {
             risposta.sendRedirect(richiesta.getContextPath() + "/login");
             return;
         }

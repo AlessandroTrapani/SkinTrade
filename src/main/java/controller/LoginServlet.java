@@ -52,6 +52,7 @@ public class LoginServlet extends HttpServlet {
 
         HttpSession sessione = request.getSession();
         sessione.setAttribute("utenteLoggato", utente);
+        sessione.setAttribute("tokenAccesso", "TOKEN_VALIDO");
 
         if (utente.isAdmin()) {
             response.sendRedirect(request.getContextPath() + "/admin/home");
