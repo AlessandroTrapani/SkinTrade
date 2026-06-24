@@ -12,6 +12,11 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.Utente;
 
+/**
+ * Servlet che gestisce la registrazione di un nuovo utente.
+ * Valida i dati ricevuti dal form, controlla che l'email non sia già registrata
+ * e salva il nuovo utente nel database tramite DAO.
+ */
 @WebServlet("/registrazione")
 public class RegistrazioneServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

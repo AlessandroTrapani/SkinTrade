@@ -14,6 +14,11 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.Utente;
 
+/**
+ * Filtro che protegge tutte le risorse dell'area amministratore.
+ * L'accesso è consentito solo agli utenti autenticati con ruolo ADMIN
+ * e token valido in sessione.
+ */
 @WebFilter("/admin/*")
 public class FiltroAdmin implements Filter {
 

@@ -11,6 +11,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Prodotto;
 
+/**
+ * Servlet che gestisce la visualizzazione del dettaglio di un prodotto.
+ * Riceve l'id del prodotto dalla richiesta, recupera le informazioni dal database
+ * tramite DAO e inoltra i dati alla JSP di dettaglio.
+ */
 @WebServlet("/dettaglio-prodotto")
 public class DettaglioProdottoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

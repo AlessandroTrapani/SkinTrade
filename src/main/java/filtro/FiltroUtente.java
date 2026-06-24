@@ -14,6 +14,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.Utente;
 
+/**
+ * Filtro che protegge le pagine riservate agli utenti autenticati,
+ * come checkout, storico ordini e dettaglio ordine.
+ */
 @WebFilter({ "/checkout", "/storico-ordini", "/dettaglio-ordine" })
 public class FiltroUtente implements Filter {
 

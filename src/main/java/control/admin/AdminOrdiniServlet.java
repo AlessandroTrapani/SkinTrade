@@ -14,6 +14,11 @@ import jakarta.servlet.http.HttpSession;
 import model.Ordine;
 import model.Utente;
 
+/**
+ * Servlet dell'area amministratore che gestisce la visualizzazione degli ordini.
+ * Recupera gli ordini dal database applicando eventuali filtri per data,
+ * id utente o email di consegna.
+ */
 @WebServlet("/admin/ordini")
 public class AdminOrdiniServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

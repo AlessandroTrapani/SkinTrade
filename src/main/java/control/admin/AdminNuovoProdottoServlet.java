@@ -13,6 +13,11 @@ import jakarta.servlet.http.HttpSession;
 import model.Prodotto;
 import model.Utente;
 
+/**
+ * Servlet dell'area amministratore dedicata all'inserimento di nuovi prodotti.
+ * Mostra il form di creazione e salva nel database il prodotto inserito
+ * dall'amministratore.
+ */
 @WebServlet("/admin/nuovo-prodotto")
 public class AdminNuovoProdottoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

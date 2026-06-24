@@ -14,6 +14,11 @@ import jakarta.servlet.http.HttpSession;
 import model.Prodotto;
 import model.Utente;
 
+/**
+ * Servlet dell'area amministratore che gestisce la visualizzazione dei prodotti.
+ * Recupera dal database l'intero catalogo, compresi prodotti eliminati
+ * o non disponibili, e inoltra i dati alla JSP di gestione prodotti.
+ */
 @WebServlet("/admin/prodotti")
 public class AdminProdottiServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

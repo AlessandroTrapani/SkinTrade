@@ -9,6 +9,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
+/**
+ * Servlet che gestisce il logout dell'utente.
+ * Invalida la sessione corrente rimuovendo utente, token di accesso
+ * ed eventuali dati temporanei associati alla sessione.
+ */
 @WebServlet("/logout")
 public class LogoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

@@ -1,6 +1,8 @@
+// Attende che il DOM sia completamente caricato prima di accedere agli elementi della pagina.
 document.addEventListener("DOMContentLoaded", function () {
-    const form = document.getElementById("formRegistrazione");
-
+ 
+// Recupera il form e interrompe lo script se la pagina corrente non contiene il form di registrazione.   
+	const form = document.getElementById("formRegistrazione");
     if (!form) {
         return;
     }
@@ -19,9 +21,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
     let emailDisponibile = false;
 
-    const regexNome = /^[A-Za-zÀ-ÿ\s]{2,50}$/;
-    const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    const regexPassword = /^.{4,}$/;
+// Espressioni regolari usate per validare i campi del form.
+	const regexNome = /^[A-Za-zÀ-ÿ\s]{2,50}$/;
+	const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+	const regexPassword = /^.{4,}$/;
 
     function validaNome() {
         if (!regexNome.test(nome.value.trim())) {
@@ -54,6 +57,7 @@ document.addEventListener("DOMContentLoaded", function () {
         return true;
     }
 
+// Esegue una richiesta AJAX alla Servlet per verificare se l'email è già registrata.	
     function verificaEmailAjax() {
         if (!validaEmailFormato()) {
             return;
@@ -99,6 +103,7 @@ document.addEventListener("DOMContentLoaded", function () {
     email.addEventListener("change", verificaEmailAjax);
     password.addEventListener("change", validaPassword);
 
+// Impedisce l'invio del form se almeno un campo non è valido.	
     form.addEventListener("submit", function (event) {
         const nomeValido = validaNome();
         const cognomeValido = validaCognome();

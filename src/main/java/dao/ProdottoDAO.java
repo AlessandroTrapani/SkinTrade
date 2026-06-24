@@ -9,8 +9,16 @@ import java.util.ArrayList;
 import model.Prodotto;
 import util.ConnessioneDatabase;
 
+/**
+ * DAO dedicato alla gestione dei prodotti.
+ * Incapsula tutte le operazioni di accesso alla tabella prodotti.
+ */
 public class ProdottoDAO {
-
+	
+/**
+ * Restituisce i prodotti disponibili e con quantità maggiore di zero.
+ * Questo metodo viene usato dal catalogo pubblico.
+ */
 	public ArrayList<Prodotto> trovaTutti() {
 		ArrayList<Prodotto> prodotti = new ArrayList<>();
 
@@ -76,8 +84,13 @@ public class ProdottoDAO {
 
 		return prodotto;
 	}
-
+	
+/**
+* Restituisce tutti i prodotti presenti nel database.
+* Questo metodo viene usato nell'area amministratore.
+*/
 	public ArrayList<Prodotto> trovaTuttiAdmin() {
+
 		ArrayList<Prodotto> prodotti = new ArrayList<>();
 
 		String sql = "SELECT * FROM prodotti ORDER BY id DESC";
@@ -176,7 +189,12 @@ public class ProdottoDAO {
 
 		return false;
 	}
-
+	
+/**
+* Esegue l'eliminazione logica del prodotto.
+* Il record non viene cancellato fisicamente per mantenere consistenti
+* gli ordini già effettuati.
+*/
 	public boolean elimina(int idProdotto) {
 		String sql = "UPDATE prodotti SET stato = 'ELIMINATO' WHERE id = ?";
 
@@ -194,7 +212,10 @@ public class ProdottoDAO {
 
 		return false;
 	}
-
+	
+/**
+* Cerca prodotti applicando eventuali filtri su nome, gioco e categoria.
+*/
 	public ArrayList<Prodotto> cercaProdotti(String ricerca, String gioco, String categoria) {
 		ArrayList<Prodotto> prodotti = new ArrayList<>();
 

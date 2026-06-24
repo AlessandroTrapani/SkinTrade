@@ -9,6 +9,10 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+/**
+ * Servlet che gestisce la dashboard dell'area amministratore.
+ * Inoltra la richiesta alla pagina principale dell'area admin.
+ */
 @WebServlet("/admin/home")
 public class HomeAdminServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

@@ -13,6 +13,11 @@ import jakarta.servlet.http.HttpSession;
 import model.Prodotto;
 import model.Utente;
 
+/**
+ * Servlet dell'area amministratore dedicata alla modifica dei prodotti.
+ * Recupera il prodotto selezionato, mostra il form precompilato
+ * e aggiorna i dati del prodotto nel database.
+ */
 @WebServlet("/admin/modifica-prodotto")
 public class AdminModificaProdottoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

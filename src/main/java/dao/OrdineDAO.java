@@ -12,9 +12,17 @@ import model.ElementoCarrello;
 import model.Ordine;
 import util.ConnessioneDatabase;
 import java.util.ArrayList;
-
+/**
+ * DAO dedicato alla gestione degli ordini.
+ * Si occupa del salvataggio degli ordini, dei dettagli ordine
+ * e delle interrogazioni usate da utente e amministratore.
+ */
 public class OrdineDAO {
 
+/**
+* Salva un ordine e i relativi dettagli in un'unica transazione.
+* Se una delle operazioni fallisce, viene eseguito il rollback.
+*/
 	public boolean salvaOrdine(Ordine ordine, Carrello carrello) {
 		String sqlOrdine = "INSERT INTO ordini "
 				+ "(id_utente, totale, email_consegna, note_consegna, metodo_pagamento, stato) "
@@ -98,6 +106,9 @@ public class OrdineDAO {
 		return false;
 	}
 
+/**
+ * Restituisce tutti gli ordini effettuati da uno specifico utente.
+*/
 	public ArrayList<Ordine> trovaOrdiniPerUtente(int idUtente) {
 		ArrayList<Ordine> ordini = new ArrayList<>();
 
@@ -273,7 +284,11 @@ public class OrdineDAO {
 
 		return false;
 	}
-
+	
+/**
+* Restituisce gli ordini filtrati per data, utente o email di consegna.
+* Usato nella pagina di gestione ordini dell'amministratore.
+*/
 	public ArrayList<Ordine> cercaOrdiniAdmin(String dataInizio, String dataFine, String idUtenteParametro,
 			String emailConsegna) {
 		ArrayList<Ordine> ordini = new ArrayList<>();

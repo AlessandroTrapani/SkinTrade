@@ -12,6 +12,11 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.Prodotto;
 
+/**
+ * Servlet che gestisce la visualizzazione del catalogo prodotti.
+ * Recupera dal database i prodotti disponibili, applicando eventuali filtri
+ * di ricerca, gioco e categoria, e inoltra i dati alla JSP del catalogo.
+ */
 @WebServlet("/catalogo")
 public class CatalogoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

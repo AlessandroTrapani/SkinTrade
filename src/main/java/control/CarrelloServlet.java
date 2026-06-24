@@ -13,6 +13,11 @@ import jakarta.servlet.http.HttpSession;
 import model.Carrello;
 import model.Prodotto;
 
+/**
+ * Servlet che gestisce le operazioni sul carrello dell'utente.
+ * Permette di aggiungere prodotti, aggiornare quantità, rimuovere elementi
+ * e svuotare il carrello mantenuto nella sessione HTTP.
+ */
 @WebServlet("/carrello")
 public class CarrelloServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

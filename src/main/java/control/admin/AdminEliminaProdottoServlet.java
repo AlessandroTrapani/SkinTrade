@@ -11,6 +11,11 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.Utente;
 
+/**
+ * Servlet dell'area amministratore che gestisce l'eliminazione logica dei prodotti.
+ * Il prodotto non viene cancellato fisicamente dal database, ma marcato come eliminato
+ * per mantenere consistenti gli ordini già effettuati.
+ */
 @WebServlet("/admin/elimina-prodotto")
 public class AdminEliminaProdottoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

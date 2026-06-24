@@ -12,6 +12,11 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.Utente;
 
+/**
+ * Servlet che gestisce il login degli utenti e degli amministratori.
+ * Verifica le credenziali tramite DAO e, in caso di successo, salva in sessione
+ * l'utente autenticato e il token di accesso.
+ */
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

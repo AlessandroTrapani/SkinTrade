@@ -14,6 +14,11 @@ import jakarta.servlet.http.HttpSession;
 import model.Ordine;
 import model.Utente;
 
+/**
+ * Servlet che gestisce lo storico ordini dell'utente autenticato.
+ * Recupera dal database tutti gli ordini associati all'utente in sessione
+ * e li inoltra alla JSP dello storico ordini.
+ */
 @WebServlet("/storico-ordini")
 public class StoricoOrdiniServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

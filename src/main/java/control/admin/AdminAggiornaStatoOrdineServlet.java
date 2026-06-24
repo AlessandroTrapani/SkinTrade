@@ -11,6 +11,11 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import model.Utente;
 
+/**
+ * Servlet dell'area amministratore che permette di aggiornare lo stato di un ordine.
+ * Riceve il nuovo stato dal form, valida il valore ricevuto e aggiorna
+ * il record corrispondente nel database.
+ */
 @WebServlet("/admin/aggiorna-stato-ordine")
 public class AdminAggiornaStatoOrdineServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

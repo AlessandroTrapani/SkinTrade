@@ -14,6 +14,11 @@ import model.Carrello;
 import model.Ordine;
 import model.Utente;
 
+/**
+ * Servlet che gestisce il checkout dell'utente autenticato.
+ * Controlla il carrello, valida i dati di consegna e pagamento simulato,
+ * salva l'ordine nel database e svuota il carrello dopo la conferma.
+ */
 @WebServlet("/checkout")
 public class CheckoutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -24,7 +29,7 @@ public class CheckoutServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		
 		HttpSession sessione = request.getSession();
 
 		Utente utente = (Utente) sessione.getAttribute("utenteLoggato");
@@ -47,9 +52,11 @@ public class CheckoutServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 
+
 		HttpSession sessione = request.getSession();
 
 		Utente utente = (Utente) sessione.getAttribute("utenteLoggato");
+
 		Carrello carrello = (Carrello) sessione.getAttribute("carrello");
 
 		if (utente == null) {

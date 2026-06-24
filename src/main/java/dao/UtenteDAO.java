@@ -8,6 +8,10 @@ import java.sql.SQLException;
 import model.Utente;
 import util.ConnessioneDatabase;
 
+/**
+ * DAO dedicato alla gestione degli utenti.
+ * Gestisce login, registrazione e verifica dell'esistenza di un'email.
+ */
 public class UtenteDAO {
 
 	public Utente trovaPerEmailEPassword(String email, String password) {

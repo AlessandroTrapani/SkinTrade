@@ -15,6 +15,11 @@ import model.DettaglioOrdine;
 import model.Ordine;
 import model.Utente;
 
+/**
+ * Servlet che gestisce il dettaglio di un ordine dell'utente autenticato.
+ * Verifica che l'ordine appartenga all'utente in sessione, recupera i dettagli
+ * dal database e inoltra i dati alla JSP di dettaglio ordine.
+ */
 @WebServlet("/dettaglio-ordine")
 public class DettaglioOrdineServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

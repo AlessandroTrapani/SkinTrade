@@ -15,6 +15,11 @@ import model.DettaglioOrdine;
 import model.Ordine;
 import model.Utente;
 
+/**
+ * Servlet dell'area amministratore che gestisce il dettaglio di un ordine.
+ * Recupera le informazioni generali dell'ordine e i prodotti acquistati,
+ * rendendoli disponibili alla JSP di dettaglio ordine admin.
+ */
 @WebServlet("/admin/dettaglio-ordine")
 public class AdminDettaglioOrdineServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;

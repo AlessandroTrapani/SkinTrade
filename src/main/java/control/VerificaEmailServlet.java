@@ -9,6 +9,11 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+/**
+ * Servlet utilizzata tramite AJAX per verificare la disponibilità di un'email.
+ * Riceve l'email dalla richiesta, controlla la sua presenza nel database
+ * e restituisce una risposta JSON alla pagina di registrazione.
+ */
 @WebServlet("/verifica-email")
 public class VerificaEmailServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
