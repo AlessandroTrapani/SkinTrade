@@ -15,41 +15,48 @@ Il sito simula un e-commerce dedicato alla compravendita di oggetti digitali per
 * MySQL
 * HTML
 * CSS
-* JavaScript base
 * Apache Tomcat
 * Eclipse IDE
 * Git e GitHub
+* AJAX
+* JavaScript
+* DataSource
+* JNDI
 
 ## Architettura del progetto
 
-Il progetto segue la seguente struttura:
+Il progetto segue una struttura ispirata al pattern MVC:
 
-* **Model**: classi JavaBean che rappresentano le entità principali del progetto.
-* **View**: pagine JSP che mostrano i dati all'utente.
-* **Controller**: Servlet che ricevono le richieste, interagiscono con i DAO e inoltrano le risposte alle JSP.
-* **DAO**: classi dedicate all'accesso al database tramite JDBC.
-* **Filter**: classi usate per proteggere le pagine riservate agli utenti loggati e agli amministratori.
+- **Model**: classi JavaBean contenute nel package `model`, che rappresentano le entità principali del progetto.
+- **View**: pagine JSP contenute in `WEB-INF/view`, non accessibili direttamente dal browser.
+- **Controller**: Servlet contenute nei package `control` e `control.admin`, che ricevono le richieste, interagiscono con i DAO e inoltrano i dati alle JSP.
+- **DAO**: classi contenute nel package `dao`, usate per incapsulare la logica di accesso al database.
+- **Filter**: classi contenute nel package `filtro`, usate per proteggere le aree riservate agli utenti loggati e agli amministratori.
+- **Util**: classi di supporto, tra cui la connessione al database tramite DataSource.
 
 ## Struttura principale
 
-```text
+
 src/main/java
-├── controller
-├── controller.admin
+├── control
+├── control.admin
 ├── dao
 ├── filtro
-├── modello
+├── model
 └── util
 
 src/main/webapp
-├── admin
-├── css
-├── immagini
-├── js
-├── pagine
+├── images
+│   └── prodotti
+├── scripts
+├── styles
+├── META-INF
 ├── WEB-INF
+│   ├── lib
+│   └── view
+│       ├── admin
+│       └── pagine
 └── index.jsp
-```
 
 ## Funzionalità utente
 
@@ -226,7 +233,16 @@ Password: admin
 
 ## Protezione delle pagine
 
-Il progetto utilizza due Filter principali.
+Il progetto utilizza la sessione HTTP per mantenere le informazioni dell'utente autenticato.
+
+Al momento del login o della registrazione viene salvato in sessione:
+
+```text
+utenteLoggato
+tokenAccesso
+```
+
+Il token viene controllato dai Filter insieme al ruolo dell'utente.
 
 ### FiltroAdmin
 
@@ -236,7 +252,7 @@ Protegge le pagine dell'area admin:
 /admin/*
 ```
 
-Solo gli utenti con ruolo `ADMIN` possono accedere a queste pagine.
+Solo gli utenti con ruolo `ADMIN` e token valido possono accedere a queste pagine.
 
 ### FiltroUtente
 
@@ -248,7 +264,46 @@ Protegge le pagine riservate agli utenti autenticati:
 /dettaglio-ordine
 ```
 
-Se un utente non autenticato tenta di accedere a queste pagine, viene reindirizzato alla pagina di login.
+Se un utente non autenticato o senza token valido tenta di accedere a queste pagine, viene reindirizzato alla pagina di login.
+
+## Validazione JavaScript e AJAX
+
+Il progetto utilizza JavaScript esterno, inserito nella cartella `scripts`, per validare alcuni form lato client.
+
+Nella pagina di registrazione vengono validati:
+
+- nome;
+- cognome;
+- email;
+- password.
+
+La validazione utilizza espressioni regolari e mostra i messaggi di errore direttamente nella pagina modificando il DOM, senza usare finestre `alert`.
+
+La validazione viene eseguita:
+
+- quando l'utente termina l'inserimento di un campo, tramite evento `change`;
+- quando l'utente tenta di inviare il form, tramite evento `submit`.
+
+Il progetto utilizza anche AJAX per verificare se l'email inserita nella registrazione è già presente nel database.  
+La chiamata viene effettuata verso la Servlet:
+
+```text
+/verifica-email
+```
+La Servlet restituisce una risposta JSON e la pagina aggiorna dinamicamente il messaggio mostrato all'utente.
+
+## Accesso al database
+
+L'accesso al database MySQL viene gestito tramite DataSource configurato su Tomcat.
+
+La risorsa JNDI utilizzata è:
+
+```text
+jdbc/skintrade
+```
+La classe ConnessioneDatabase recupera il DataSource tramite lookup JNDI e fornisce connessioni ai DAO.
+
+Questa soluzione evita di creare manualmente le connessioni con DriverManager e rispetta il requisito di utilizzare un DataSource per la persistenza dei dati.
 
 ## Avvio del progetto
 
@@ -258,9 +313,9 @@ Per eseguire il progetto:
 2. configurare Apache Tomcat;
 3. creare il database MySQL `skintrade`;
 4. creare le tabelle richieste;
-5. configurare la password del database nella classe `ConnessioneDatabase`;
-6. aggiungere il driver MySQL Connector/J al progetto;
-7. avviare Tomcat da Eclipse;
+5. configurare il DataSource `jdbc/skintrade` in `META-INF/context.xml`;
+6. verificare che il driver MySQL Connector/J sia presente in `WEB-INF/lib` o nella cartella `lib` di Tomcat;
+7. avviare Tomcat;
 8. aprire il sito nel browser.
 
 Esempio URL:
